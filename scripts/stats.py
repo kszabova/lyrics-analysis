@@ -22,7 +22,7 @@ stats = {
     }
 }
 
-with open("../data/song_lyrics.json") as file:
+with open("../data/song_lyrics_clean.json") as file:
     objects = ijson.items(file, "item")
 
     for object in objects:
