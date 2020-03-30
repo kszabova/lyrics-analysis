@@ -33,12 +33,12 @@ class Statistics():
                 # compute metrics
                 for object in objects:
 
-                    lines = len(objects["lyrics"])
+                    lines = len(object["lyrics"])
                     words = sum([len(line.split()) for line in object["lyrics"]])
 
                     genre = object["genre"]
                     stats["genres"][genre] = stats["genres"].get(genre, {"artists": {}})
-                    genre_obj = stats["genre"][genre]
+                    genre_obj = stats["genres"][genre]
                     genre_obj["songs"] = genre_obj.get("songs", 0) + 1
                     genre_obj["lines"] = genre_obj.get("lines", 0) + lines
                     genre_obj["words"] = genre_obj.get("words", 0) + words
@@ -84,6 +84,11 @@ class Statistics():
 
         :returns: python dictionary with specified data
         """
-        pass
+
+        return self._data
+
+stats = Statistics("../data/song_lyrics_no_duplicates.json")
+stats.parse()
+pprint.pprint(stats.show())
 
 
