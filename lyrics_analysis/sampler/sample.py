@@ -48,7 +48,7 @@ def sample(n, source, dest, total_n=None, shuffle=False):
                         try:
                             lyrics = object["lyrics"]
                             if shuffle:
-                                lyrics = random.shuffle(lyrics)
+                                random.shuffle(lyrics)
                             examples.append(lyrics)
                             counter += 1
                             if counter == n:
