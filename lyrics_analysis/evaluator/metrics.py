@@ -2,7 +2,7 @@ import random
 
 def eval_random(lyrics):
     """
-    Generates a random integer between 0 and 10.
+    Generates a random score between 0 and 10.
     :param lyrics: Lyrics to evaluate
     :return: Score
     """
