@@ -15,6 +15,6 @@ def eval_line_length(lyrics):
     :param lyrics: Lyrics to be evaluated
     :return: Score
     """
-    words = sum((sum((1 for _ in line)) for line in lyrics))
+    words = sum((len(line) for line in lyrics))
     lines = len(lyrics)
     return words / lines
