@@ -3,7 +3,7 @@ import json
 import random
 
 
-def sample(n, source, dest, total_n=None):
+def sample(n, source, dest, total_n=None, shuffle=False):
     """
     Takes n random objects from the source file and stores it in dest.
 
@@ -17,6 +17,7 @@ def sample(n, source, dest, total_n=None):
     :param dest: Path to destination file (will be overwritten)
     :param total_n: Total number of examples in the source file; if specified, objects
         will be taken from the entire file
+    :param shuffle: Whether or not rows are to be shuffled
     """
 
     # check if arguments are valid
@@ -35,17 +36,20 @@ def sample(n, source, dest, total_n=None):
     if total_n:
         rate = n / total_n
 
-    try:
-        with open(source) as src:
-            objects = ijson.items(src, "item")
-            counter = 0
-            examples = []
-            while counter < n:
+    counter = 0
+    examples = []
+    while counter < n:
+        try:
+            with open(source) as src:
+                objects = ijson.items(src, "item")
                 for object in objects:
                     rand = random.random()
                     if rand <= rate:
                         try:
-                            examples.append(object["lyrics"])
+                            lyrics = object["lyrics"]
+                            if shuffle:
+                                lyrics = random.shuffle(lyrics)
+                            examples.append(lyrics)
                             counter += 1
                             if counter == n:
                                 break  # stop generating new examples
@@ -54,13 +58,13 @@ def sample(n, source, dest, total_n=None):
                     else:
                         pass
 
-            # write the examples into the output file
-            try:
-                with open(dest, 'w') as dst:
-                    dst.write(json.dumps(examples))
-            except Exception as e:
-                raise e
+        except Exception as e:
+            raise e
 
+    # write the examples into the output file
+    try:
+        with open(dest, 'w') as dst:
+            dst.write(json.dumps(examples))
     except Exception as e:
         raise e
 
