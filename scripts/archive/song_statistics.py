@@ -89,6 +89,7 @@ class Statistics():
 
 stats = Statistics("../data/song_lyrics_no_duplicates.json")
 stats.parse()
-pprint.pprint(stats.show())
+with open("../data/clean_stats.json", 'w') as out_file:
+    pprint.pprint(stats.show(), out_file)
 
 

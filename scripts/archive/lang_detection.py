@@ -19,6 +19,7 @@ with open("../data/song_lyrics_music_only.json") as file:
         out_file.write("[\n")
 
         languages = {}
+        english_lyrics = 0
 
         for object in objects:
 
@@ -27,6 +28,7 @@ with open("../data/song_lyrics_music_only.json") as file:
                 lang_detected = details[0][0]
                 languages[lang_detected] = languages.get(lang_detected, 0) + 1
                 if lang_detected == "ENGLISH":
+                    english_lyrics += 1
                     out_file.write(json.dumps(object))
                     out_file.write(",\n")
             except Exception as e:
@@ -36,6 +38,7 @@ with open("../data/song_lyrics_music_only.json") as file:
                     lang_detected = details[0][0]
                     languages[lang_detected] = languages.get(lang_detected, 0) + 1
                     if lang_detected == "ENGLISH":
+                        english_lyrics += 1
                         out_file.write(json.dumps(object))
                         out_file.write(',\n')
                 except Exception as e:
@@ -45,3 +48,5 @@ with open("../data/song_lyrics_music_only.json") as file:
     # write language counts
     with open("../data/languages.json", 'w') as lang_file:
         json.dump(languages, lang_file)
+
+    print(english_lyrics)

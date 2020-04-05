@@ -4,6 +4,7 @@
             "songs": 153985,
             "lines": 10157161,
             "words": 64938123,
+            "is_music": 153965,
             "avg_line_length": 6.393334023158636,
             "avg_lines": 65.96201578075787,
             "avg_words": 421.71719972724617
@@ -12,6 +13,7 @@
             "songs": 421332,
             "lines": 15947880,
             "words": 80046568,
+            "is_music": 421332,
             "avg_line_length": 5.01926074186663,
             "avg_lines": 37.851100794622766,
             "avg_words": 189.98454425488688
@@ -20,6 +22,7 @@
             "songs": 39072,
             "lines": 1634506,
             "words": 7665085,
+            "is_music": 39063,
             "avg_line_length": 4.689542283723645,
             "avg_lines": 41.83317977067977,
             "avg_words": 196.1784653972154
@@ -28,6 +31,7 @@
             "songs": 3584,
             "lines": 415189,
             "words": 3604386,
+            "is_music": 0,
             "avg_line_length": 8.681313811300395,
             "avg_lines": 115.84514508928571,
             "avg_words": 1005.6880580357143
@@ -36,6 +40,7 @@
             "songs": 1484,
             "lines": 449217,
             "words": 2200215,
+            "is_music": 0,
             "avg_line_length": 4.897888993515384,
             "avg_lines": 302.7068733153639,
             "avg_words": 1482.6246630727762
@@ -44,6 +49,7 @@
             "songs": 20052,
             "lines": 3163238,
             "words": 27830877,
+            "is_music": 0,
             "avg_line_length": 8.798224161444697,
             "avg_lines": 157.75174546179932,
             "avg_words": 1387.9352184320767
@@ -52,6 +58,7 @@
             "songs": 5151,
             "lines": 321048,
             "words": 1908886,
+            "is_music": 0,
             "avg_line_length": 5.945796267224838,
             "avg_lines": 62.32731508444962,
             "avg_words": 370.58551737526693
@@ -60,6 +67,7 @@
             "songs": 1717,
             "lines": 541627,
             "words": 5412900,
+            "is_music": 0,
             "avg_line_length": 9.993778005897047,
             "avg_lines": 315.44962143273153,
             "avg_words": 3152.533488642982
@@ -68,6 +76,7 @@
             "songs": 5954,
             "lines": 336230,
             "words": 1644797,
+            "is_music": 5954,
             "avg_line_length": 4.891880557951402,
             "avg_lines": 56.471279811891165,
             "avg_words": 276.2507557944239
@@ -76,6 +85,7 @@
             "songs": 3972,
             "lines": 167953,
             "words": 870298,
+            "is_music": 3972,
             "avg_line_length": 5.181794906908481,
             "avg_lines": 42.28423967774421,
             "avg_words": 219.10825780463242
@@ -84,6 +94,7 @@
             "songs": 1235,
             "lines": 51399,
             "words": 300983,
+            "is_music": 0,
             "avg_line_length": 5.855814315453608,
             "avg_lines": 41.61862348178138,
             "avg_words": 243.71093117408907
@@ -92,6 +103,7 @@
             "songs": 318,
             "lines": 40179,
             "words": 340481,
+            "is_music": 0,
             "avg_line_length": 8.474103387341646,
             "avg_lines": 126.34905660377359,
             "avg_words": 1070.6949685534591
@@ -100,6 +112,7 @@
             "songs": 403,
             "lines": 85397,
             "words": 749560,
+            "is_music": 0,
             "avg_line_length": 8.777357518413996,
             "avg_lines": 211.90322580645162,
             "avg_words": 1859.9503722084366
@@ -108,6 +121,7 @@
             "songs": 194,
             "lines": 6182,
             "words": 40702,
+            "is_music": 0,
             "avg_line_length": 6.583953413134908,
             "avg_lines": 31.8659793814433,
             "avg_words": 209.8041237113402

@@ -1,7 +1,7 @@
 import ijson
 import json
 
-with open("../data/song_lyrics_clean.json") as file:
+with open("../data/song_lyrics_music_only.json") as file:
     objects = ijson.items(file, "item")
 
     with open("../data/song_lyrics_music_only.json", 'a') as out_file:

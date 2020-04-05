@@ -36,6 +36,9 @@ with open("../data/song_lyrics_clean.json") as file:
         genre_obj["songs"] = genre_obj.get("songs", 0) + 1
         genre_obj["lines"] = genre_obj.get("lines", 0) + lines
         genre_obj["words"] = genre_obj.get("words", 0) + words
+        genre_obj["is_music"] = genre_obj.get("is_music", 0)
+        if object["is_music"] != "false":
+            genre_obj["is_music"] += 1
 
         artist = object["artist"]
         stats["artists"][artist] = stats["artists"].get(artist, 0) + 1
