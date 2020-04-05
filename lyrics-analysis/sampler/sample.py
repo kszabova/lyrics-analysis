@@ -19,7 +19,7 @@ def sample(n, source, dest, total_n=None):
         will be taken from the entire file
     """
 
-    # Check if arguments are valid
+    # check if arguments are valid
     if n <= 0:
         raise ValueError("Parameter n must be at least 1.")
     if type(n) != int:
