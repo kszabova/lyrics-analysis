@@ -3,21 +3,18 @@ import json
 import random
 
 
-def sample(n, source, dest, total_n=None, shuffle=False):
+def sample(n, src_generator, total_n=None, filter=(lambda _: True)):
     """
-    Takes n random objects from the source file and stores it in dest.
-
-    The source file is expected to be an array of JSON objects with
-    a 'lyrics' field that contains an array of strings.
-
-    The result will be stored as a list of lists of strings.
+    Selects n random examples from src_stream.
+    The result will be returned as a generator.
 
     :param n: How many examples to take
-    :param source: Path to source file
-    :param dest: Path to destination file (will be overwritten)
-    :param total_n: Total number of examples in the source file; if specified, objects
-        will be taken from the entire file
-    :param shuffle: Whether or not rows are to be shuffled
+    :param src_generator: Function that creates a generator with source data
+    :param total_n: Total number of examples in the source file; if specified,
+        objects will be taken from the entire file
+    :param filter: Function returning a bool that determines
+        if the example should be considered for selection
+    :returns: Generator yielding n random examples
     """
 
     # check if arguments are valid
@@ -37,34 +34,26 @@ def sample(n, source, dest, total_n=None, shuffle=False):
         rate = n / total_n
 
     counter = 0
-    examples = []
+    # the inner loop iterates over source data until it has enough
+    # examples or until it reaches the end;
+    # the outer loop ensures that it will iterate over all the
+    # data enough times
     while counter < n:
         try:
-            with open(source) as src:
-                objects = ijson.items(src, "item")
-                for object in objects:
-                    rand = random.random()
-                    if rand <= rate:
-                        try:
-                            lyrics = object["lyrics"]
-                            if shuffle:
-                                random.shuffle(lyrics)
-                            examples.append(lyrics)
-                            counter += 1
-                            if counter == n:
-                                break  # stop generating new examples
-                        except KeyError:
-                            raise RuntimeError("File does not have correct format")
-                    else:
-                        pass
+            gen = src_generator()
+            for song in gen:
+                rand = random.random()
+                if rand <= rate and filter(song):
+                    try:
+                        yield song
+                        counter += 1
+                        if counter == n:
+                            break  # stop generating new examples
+                    except KeyError:
+                        raise RuntimeError("File does not have correct format")
+                else:
+                    pass
 
         except Exception as e:
             raise e
-
-    # write the examples into the output file
-    try:
-        with open(dest, 'w') as dst:
-            dst.write(json.dumps(examples))
-    except Exception as e:
-        raise e
 
