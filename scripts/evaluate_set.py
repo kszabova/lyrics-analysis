@@ -1,5 +1,5 @@
 import json
-from lyrics_analysis import evaluator
+from lyrics_analysis import evaluation
 
 def evaluate_set(set, metric):
     """
@@ -19,8 +19,8 @@ def evaluate_set(set, metric):
     return sum(scores) / len(scores)
 
 if __name__ == "__main__":
-    random = evaluator.eval_random
-    line_length = evaluator.eval_line_length
+    random = evaluation.eval_random
+    line_length = evaluation.eval_line_length
     print("Random evaluation:")
     print("Songs:\t\t", evaluate_set("../data/cleaned/eval_set_100_lyrics.json", random))
     print("Shuffled songs:\t", evaluate_set("../data/cleaned/eval_set_100_lyrics_shuffled.json", random))
