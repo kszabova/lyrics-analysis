@@ -3,7 +3,7 @@ import json
 import random
 
 
-def sample(n, src_generator, total_n=None, filter=(lambda _: True)):
+def sample_n_songs_from_generator(n, src_generator, total_n=None, filter=(lambda _: True)):
     """
     Selects n random examples from src_stream.
     The result will be returned as a generator.

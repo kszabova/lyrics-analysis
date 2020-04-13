@@ -24,7 +24,7 @@ for size in sizes:
     source = data_dir + "song_lyrics_english_only.json"
     dest = data_dir + file_prefix + str(size) + "_lyrics.json"
     examples = []
-    for example in sampler.sample(size, create_generator_from_file(source)):
+    for example in sampler.sample_n_songs_from_generator(size, create_generator_from_file(source)):
         examples.append(example)
     with open(dest, 'w') as out_file:
         json.dump(examples, out_file)
@@ -35,7 +35,7 @@ for size in sizes:
     source = data_dir + "song_lyrics_english_only.json"
     dest = data_dir + file_prefix + str(size) + "_lyrics_shuffled.json"
     examples = []
-    for example in sampler.sample(size, create_generator_from_file(source)):
+    for example in sampler.sample_n_songs_from_generator(size, create_generator_from_file(source)):
         examples.append(example)
     random.shuffle(examples)
     with open(dest, 'w') as out_file:
@@ -47,7 +47,7 @@ for size in sizes:
     source = data_dir + "song_lyrics_non_music.json"
     dest = data_dir + file_prefix + str(size) + "_random.json"
     examples = []
-    for example in sampler.sample(size, create_generator_from_file(source)):
+    for example in sampler.sample_n_songs_from_generator(size, create_generator_from_file(source)):
         examples.append(example)
     with open(dest, 'w') as out_file:
         json.dump(examples, out_file)
