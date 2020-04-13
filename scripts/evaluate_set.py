@@ -15,7 +15,7 @@ def evaluate_set(set, metric):
         raise e
         exit()
 
-    scores = [metric(text) for text in texts]
+    scores = [metric(text["lyrics"]) for text in texts]
     return sum(scores) / len(scores)
 
 if __name__ == "__main__":
