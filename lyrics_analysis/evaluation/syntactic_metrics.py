@@ -25,5 +25,5 @@ def proportion_parts_of_speech(lyrics):
     tokens = nltk.tokenize.word_tokenize(text)
     tagged = nltk.pos_tag(tokens)
     content_words = list(filter(lambda tag: tag[1] in content_tags, tagged))
-    return len(content_tags) / len(tagged)
+    return len(content_words) / len(tagged)
 
