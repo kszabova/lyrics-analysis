@@ -12,7 +12,7 @@ def count_unique_words(lyrics):
     return len(word_set)
 
 
-def proportion_parts_of_speech(lyrics):
+def proportion_content_words(lyrics):
     """
     Calculates the proportion of nouns, adjectives,
     verbs and adverbs.
