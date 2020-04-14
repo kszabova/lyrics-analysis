@@ -1,15 +1,13 @@
-import ijson
-import json
 import random
 
 
-def sample_n_songs_from_generator(n, src_generator, total_n=None, filter=(lambda _: True)):
+def sample_n_songs_from_generator(n, file_line_generator, total_n=None, filter=(lambda _: True)):
     """
     Selects n random examples from src_stream.
     The result will be returned as a generator.
 
     :param n: How many examples to take
-    :param src_generator: Function that creates a generator with source data
+    :param file_line_generator: Function that creates a generator with source data
     :param total_n: Total number of examples in the source file; if specified,
         objects will be taken from the entire file
     :param filter: Function returning a bool that determines
@@ -40,8 +38,7 @@ def sample_n_songs_from_generator(n, src_generator, total_n=None, filter=(lambda
     # data enough times
     while counter < n:
         try:
-            gen = src_generator()
-            for song in gen:
+            for song in file_line_generator():
                 rand = random.random()
                 if rand <= rate and filter(song):
                     try:
