@@ -10,23 +10,20 @@ def rhymes(lyrics, rhyme_level=2):
     :return: Proportion of rhyming lines
     """
 
-    entries = nltk.corpus.cmudict.entries()
-
-    def get_syllables(word):
-        syllables = [(w, s) for w, s in entries if w == word]
-        return syllables
+    arpabet = nltk.corpus.cmudict.dict()
 
     last_words = [word.lower() for word in helpers._get_last_words(lyrics)]
     if len(last_words) <= 1:
         return 0                # check if we have anything to parse
 
     rhyme_count = 0
-    prev_word = get_syllables(last_words[0])
+    # get pronunciation; default is no syllables if cmudict doesn't recognize the word
+    prev_word = arpabet.get(last_words[0], [])
     for word in last_words[1:]:
-        cur_word = get_syllables(word)
+        cur_word = arpabet.get(word, [])
         # count pronunciations that match in the last rhyme_level phonemes
         matches = [pron_prev[-rhyme_level:] == pron_cur[-rhyme_level:]
-                   for (_, pron_prev) in prev_word for (_, pron_cur) in cur_word]
+                   for pron_prev in prev_word for pron_cur in cur_word]
         # increase rhyme counter if there was at least one match
         rhyme_count += 1 if any(matches) else 0
         # change previous word
