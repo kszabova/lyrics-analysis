@@ -1,7 +1,9 @@
 import nltk
 from lyrics_analysis.evaluation import helpers
 
-def rhymes(lyrics, rhyme_level=2):
+ARPABET = nltk.corpus.cmudict.dict()
+
+def rhymes(lyrics, rhyme_level=2, arpabet=ARPABET):
     """
     Calculates the proportion of lines that rhyme with
     the previous line.
@@ -9,8 +11,6 @@ def rhymes(lyrics, rhyme_level=2):
     :param rhyme_level: How many phonemes should be equal
     :return: Proportion of rhyming lines
     """
-
-    arpabet = nltk.corpus.cmudict.dict()
 
     last_words = [word.lower() for word in helpers._get_last_words(lyrics)]
     if len(last_words) <= 1:
