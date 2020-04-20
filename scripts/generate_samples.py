@@ -2,6 +2,11 @@ import lyrics_analysis.sampler
 import ijson
 import json
 import random
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--sizes', default="100,1000,10000", help="Sizes of randomly generated samples")
+args = parser.parse_args()
 
 # returns a generator that yields items
 # from source file
@@ -15,7 +20,7 @@ def create_generator_from_file(path):
     return src_generator
 
 
-sizes = [100, 1000, 10000]
+sizes = args.sizes.split(',')
 data_dir = "../data/cleaned/"
 file_prefix = "eval_set_"
 
