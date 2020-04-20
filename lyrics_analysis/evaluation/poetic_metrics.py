@@ -8,13 +8,14 @@ def rhymes(lyrics, rhyme_level=2, arpabet=ARPABET):
     Calculates the proportion of lines that rhyme with
     the previous line.
     :param lyrics: List of strings representing song lyrics
-    :param rhyme_level: How many phonemes should be equal
+    :param rhyme_level: How many phonemes at the end of lines
+        should be equal to be considered a rhyme
     :return: Proportion of rhyming lines
     """
 
     last_words = [word.lower() for word in helpers._get_last_words(lyrics)]
     if len(last_words) <= 1:
-        return 0                # check if we have anything to parse
+        return 0                # check if we have at least 2 lines to parse
 
     rhyme_count = 0
     # get pronunciation; default is no syllables if cmudict doesn't recognize the word
