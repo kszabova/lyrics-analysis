@@ -4,7 +4,6 @@ from .syntactic_metrics import proportion_content_words
 from .syntactic_metrics import content_words_line_end
 from .poetic_metrics import rhymes
 from .vocab_metrics import count_unique_words
-from .helpers import _get_last_words
 
 __all__ = [
     eval_random,

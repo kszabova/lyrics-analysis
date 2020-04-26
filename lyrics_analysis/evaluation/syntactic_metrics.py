@@ -1,6 +1,6 @@
-import itertools
 import nltk
-from lyrics_analysis.evaluation import helpers
+from lyrics_analysis.helpers import helpers
+
 
 def proportion_content_words(lyrics):
     """

@@ -1,5 +1,5 @@
 import nltk
-from lyrics_analysis.evaluation import helpers
+from lyrics_analysis import helpers
 
 ARPABET = nltk.corpus.cmudict.dict()
 
