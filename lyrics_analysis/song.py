@@ -6,10 +6,10 @@ class Song:
     def __init__(self,
                  lyrics,
                  genre,
-                 author):
+                 artist):
         self._lyrics = lyrics
         self._genre = genre
-        self._author = author
+        self._artist = artist
 
     @property
     def lyrics(self):
@@ -20,5 +20,21 @@ class Song:
         return self._genre
 
     @property
-    def author(self):
-        return self._author
+    def artist(self):
+        return self._artist
+
+
+def get_song_from_dictionary(dict):
+    """
+    Creates a Song object given a dictionary.
+    It is assumed that the dictionary contains
+    keys "lyrics", "genre" and "artist".
+    :param dict: Dictionary containing data about a song
+    :return: Song object
+    """
+
+    return Song(
+        dict["lyrics"],
+        dict["genre"],
+        dict["artist"]
+    )
