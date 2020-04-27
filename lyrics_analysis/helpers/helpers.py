@@ -16,8 +16,13 @@ def _get_last_n_phonemes(words, n, arpabet):
     :param n: How many phonemes from the end of the
         word should be returned
     :param arpabet: Dictionary with word pronunciations
-    :return: List of tuples containing the last n phonemes
-        for each word
+    :return: List of lists of tuples containing the last n phonemes
+        for each word for each possible pronunciation
     """
 
-    return words.map(lambda word: arpabet.get(word, [])[-n:])
+    phonemes = []
+    for word in words:
+        phonemes.append(
+            list(map(lambda pron: tuple(pron[-n:]), arpabet.get(word, [])))
+        )
+    return phonemes

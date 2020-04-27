@@ -21,16 +21,20 @@ def rhymes(lyrics, rhyme_level=2, max_distance=2, arpabet=ARPABET):
 
     # store all rhyming lines in a dictionary
     rhyming_lines = {}
-    for i, phoneme in enumerate(last_phonemes):
-        rhyming_lines[phoneme] = rhyming_lines.get(phoneme, []).append(i)
+    for i, prons in enumerate(last_phonemes):
+        for pron in prons:
+            rhyming_lines[pron] = rhyming_lines.get(pron, [])
+            rhyming_lines[pron].append(i)
 
     # add a point for each line that rhymes with a line at at most max_distance
     rhyme_count = 0
-    for i, phoneme in enumerate(last_phonemes):
+    for i, prons in enumerate(last_phonemes):
         considered_lines = [i - d for d in range(1, max_distance + 1)] + \
                            [i + d for d in range(1, max_distance + 1)]
-        if set(rhyming_lines[phoneme]).intersection(set(considered_lines)):
-            rhyme_count += 1
+        for pron in prons:
+            if set(rhyming_lines[pron]).intersection(set(considered_lines)):
+                rhyme_count += 1
+                break
 
     # calculate the proportion of rhyming lines
     return rhyme_count / len(last_words)
