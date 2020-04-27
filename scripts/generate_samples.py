@@ -20,7 +20,7 @@ def create_generator_from_file(path):
     return src_generator
 
 
-sizes = args.sizes.split(',')
+sizes = [int(size) for size in args.sizes.split(',')]
 data_dir = "../data/cleaned/"
 file_prefix = "eval_set_"
 
@@ -37,8 +37,9 @@ print("Finished creating lyrics sets.")
 for size in sizes:
     source = data_dir + "song_lyrics_english_only.json"
     dest = data_dir + file_prefix + str(size) + "_lyrics_shuffled.json"
-    examples = list(lyrics_analysis.sample_n_songs_from_generator(size, create_generator_from_file(source)))
-    random.shuffle(examples)
+    examples = list(lyrics_analysis.sampler.sample_n_songs_from_generator(size, create_generator_from_file(source)))
+    for example in examples:
+        random.shuffle(example["lyrics"])
     with open(dest, 'w') as out_file:
         json.dump(examples, out_file)
 print("Finished creating shuffled lyrics sets.")
