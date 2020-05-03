@@ -1,3 +1,5 @@
+import itertools
+
 def _get_last_words(lines):
     """
     Helper method that takes a list of strings and
@@ -26,3 +28,42 @@ def _get_last_n_phonemes(words, n, arpabet):
             list(map(lambda pron: tuple(pron[-n:]), arpabet.get(word, [])))
         )
     return phonemes
+
+
+INTERCHANGEABLE_PHONEMES = {
+    'AA': ['AA', 'AE', 'AH'],
+    'AE': ['AE', 'AA', 'AH'],
+    'AH': ['AH', 'AA', 'AE'],
+    'B': ['B', 'P'],
+    'P': ['B', 'P'],
+    'CH': ['CH', 'JH'],
+    'JH': ['CH', 'JH'],
+    'D': ['D', 'T', 'DH'],
+    'DH': ['D', 'DH'],
+    'T': ['D', 'T', 'TH'],
+    'TH': ['T', 'TH'],
+    'F': ['F', 'V'],
+    'V': ['F', 'V'],
+    'G': ['G', 'K'],
+    'K': ['G', 'K'],
+    'SH': ['SH', 'ZH'],
+    'ZH': ['SH', 'ZH'],
+    'M': ['M', 'N'],
+    'N': ['M', 'N'],
+    'R': ['R', 'L'],
+    'L': ['R', 'L'],
+    'S': ['S', 'Z'],
+    'Z': ['S', 'Z']
+}
+
+def _get_alternative_pronunciations(pronunciation):
+    """
+    Creates a list of pronunciations with all possible interchangeable
+    combinations of phonemes.
+    :param pronunciation: Tuple of phonemes
+    :return: List of tuples containing interchangeable pronunciations
+    """
+    alternative_phonemes = [
+        INTERCHANGEABLE_PHONEMES.get(phoneme, [phoneme]) for phoneme in pronunciation
+    ]
+    return list(itertools.product(*alternative_phonemes))
