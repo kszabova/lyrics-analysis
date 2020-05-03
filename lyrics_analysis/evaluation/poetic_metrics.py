@@ -17,7 +17,11 @@ def rhymes(lyrics, rhyme_level=2, max_distance=2, arpabet=ARPABET):
     """
 
     last_words = [word.lower() for word in helpers._get_last_words(lyrics)]
-    last_phonemes = helpers._get_last_n_phonemes(last_words, rhyme_level, arpabet)
+    base_last_phonemes = helpers._get_last_n_phonemes(last_words, rhyme_level, arpabet)
+    last_phonemes = []
+    for base_pron in base_last_phonemes:
+        for pron in helpers._get_alternative_pronunciations(base_pron):
+            last_phonemes.append(pron)
 
     # store all rhyming lines in a dictionary
     rhyming_lines = {}
