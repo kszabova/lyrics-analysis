@@ -15,4 +15,7 @@ class Song(models.Model):
 class Score(models.Model):
 
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
-    rhymes = models.FloatField(default=0)
+    rhyme_score = models.FloatField(default=0)
+
+    def __str__(self):
+        return str(self.song)
