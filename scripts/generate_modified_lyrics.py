@@ -38,7 +38,7 @@ for size in sizes:
         dest = path + prefix + str(size) + func_name + ".json"
         examples = []
         for example in sampler.sample_n_songs_from_generator(size, create_generator_from_file(source)):
-            example["lyrics"] = func(example["lyrics"])
+            example["lyrics"] = func(example["lyrics"], probability=0.5)
             examples.append(example)
         with open(dest, 'w') as out_file:
             json.dump(examples, out_file)
