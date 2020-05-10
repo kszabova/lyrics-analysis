@@ -25,7 +25,7 @@ def create_generator_from_file(path):
 sizes = [100, 1000, 10000]
 funcs = [
     modifications.remove_last_word_on_line,
-    functools.partial(modifications.replace_last_words_on_line, words=["porcupine", "pangolin", "anteater"])
+    functools.partial(modifications.replace_last_words_on_line, words=["porcupine", "armadillo", "anteater"])
 ]
 func_names = ["_removed_words", "_replaced_words"]
 
