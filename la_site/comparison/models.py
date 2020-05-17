@@ -5,8 +5,14 @@ class Song(models.Model):
 
     artist = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
-    genre = models.TextChoices('Genre', 'Rap Pop Rock R-B Country')
-    lyrics = models.CharField()
+    genre = models.CharField(max_length=3, choices=[
+        ('RAP', 'rap'),
+        ('POP', 'pop'),
+        ('RCK', 'rock'),
+        ('RNB', 'r-b'),
+        ('CTR', 'country')
+    ])
+    lyrics = models.TextField()
 
     def __str__(self):
         return str(self.artist) + ": " + str(self.title)
