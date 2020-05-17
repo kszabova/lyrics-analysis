@@ -29,7 +29,7 @@ class Score(models.Model):
 
     @classmethod
     def create(cls, song):
-        rhyme_score = 0.3 #evaluation.rhymes(song.lyrics)
+        rhyme_score = 0.2 #evaluation.rhymes(song.lyrics)
 
         score = cls(song=song, rhyme_score=rhyme_score)
         return score
