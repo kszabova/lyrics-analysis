@@ -1,6 +1,14 @@
 from django.db import models
 
-#from lyrics_analysis import evaluation
+# TODO: How to import the module properly?
+MODULE_PATH = "C:/Users/kristina/Documents/School/Rocnikac/lyrics-analysis/lyrics_analysis/__init__.py"
+MODULE_NAME = "lyrics_analysis"
+import importlib
+import sys
+spec = importlib.util.spec_from_file_location(MODULE_NAME, MODULE_PATH)
+lyrics_analysis = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = lyrics_analysis
+spec.loader.exec_module(lyrics_analysis)
 
 class Song(models.Model):
 
@@ -29,7 +37,8 @@ class Score(models.Model):
 
     @classmethod
     def create(cls, song):
-        rhyme_score = 0.2 #evaluation.rhymes(song.lyrics)
+        lyrics = song.lyrics.splitlines()
+        rhyme_score = lyrics_analysis.evaluation.rhymes(lyrics)
 
         score = cls(song=song, rhyme_score=rhyme_score)
         return score

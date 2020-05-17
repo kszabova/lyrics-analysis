@@ -11,12 +11,12 @@ def evaluate_lyrics(request, score_id):
     score = get_object_or_404(Score, pk=score_id)
 
     # find a song with a better score
-    better_scores = Score.objects.filter(rhyme_score__gte=score.rhyme_score)
-    better_score = random.choice(better_scores)
+    better_scores = Score.objects.filter(rhyme_score__gt=score.rhyme_score)
+    better_score = random.choice(better_scores) if better_scores else None
 
     # find a song with a worse score
-    worse_scores = Score.objects.filter(rhyme_score__lte=score.rhyme_score)
-    worse_score = random.choice(worse_scores)
+    worse_scores = Score.objects.filter(rhyme_score__lt=score.rhyme_score)
+    worse_score = random.choice(worse_scores) if worse_scores else None
 
     return render(
         request,
