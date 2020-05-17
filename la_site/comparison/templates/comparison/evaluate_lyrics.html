@@ -1,18 +1,22 @@
 <h1>{{ score.song.title}}</h1>
 <h2>{{ score.song.artist }}</h2>
-<p>{{ score.song.lyrics }}</p>
+<p>{{ score.song.lyrics|linebreaks }}</p>
 <ul>
     <li>Rhymes: {{ score.rhyme_score }}</li>
 </ul>
 
+{% if better %}
 <h1>Better song: {{ better.song.title }}</h1>
 <h2>By: {{ better.song.artist }}</h2>
 <ul>
     <li>Rhymes: {{ better.rhyme_score }}</li>
 </ul>
+{% endif %}
 
+{% if worse %}
 <h1>Worse song: {{ worse.song.title }}</h1>
 <h2>By: {{ worse.song.artist }}</h2>
 <ul>
     <li>Rhymes: {{ worse.rhyme_score }}</li>
 </ul>
+{% endif %}
