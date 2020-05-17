@@ -1,5 +1,6 @@
 from django.db import models
 
+#from lyrics_analysis import evaluation
 
 class Song(models.Model):
 
@@ -25,3 +26,10 @@ class Score(models.Model):
 
     def __str__(self):
         return str(self.song)
+
+    @classmethod
+    def create(cls, song):
+        rhyme_score = 0.3 #evaluation.rhymes(song.lyrics)
+
+        score = cls(song=song, rhyme_score=rhyme_score)
+        return score
