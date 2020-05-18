@@ -26,6 +26,11 @@ class Song(models.Model):
     def __str__(self):
         return str(self.artist) + ": " + str(self.title)
 
+    @classmethod
+    def create(cls, artist, title, genre, lyrics):
+        song = cls(artist=artist, title=title, genre=genre, lyrics=lyrics)
+        return song
+
 
 class Score(models.Model):
 
