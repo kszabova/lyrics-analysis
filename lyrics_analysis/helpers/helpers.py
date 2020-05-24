@@ -1,4 +1,7 @@
 import itertools
+import ijson
+
+import lyrics_analysis
 
 def _get_last_words(lines):
     """
@@ -67,3 +70,36 @@ def _get_alternative_pronunciations(pronunciation):
         INTERCHANGEABLE_PHONEMES.get(phoneme, [phoneme]) for phoneme in pronunciation
     ]
     return list(itertools.product(*alternative_phonemes))
+
+
+def _get_mean_set_score(set, metric):
+    """
+    Calculates the mean score of all songs in set using the specified metric.
+    :param set: Generator that yields Song objects
+    :param metric: Metric used for calculating the score
+    :return: Mean score of all songs
+    """
+
+    scores = []
+    for song in set():
+        scores.append(metric(song.lyrics))
+
+    return sum(scores) / len(scores)
+
+
+def _get_generator_from_file(file):
+    """
+    Takes a JSON file and creates a generator that
+    yields all songs form it as Song objects.
+    :param file: Source file with songs
+    :return: Generator yielding Song objects
+    """
+    def generator():
+        with open(file) as f:
+            songs = ijson.items(f, 'item')
+            for song in songs:
+                yield lyrics_analysis.Song(
+                    song["lyrics"], song["genre"], song["artist"], song["title"]
+                )
+
+    return generator
