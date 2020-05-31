@@ -3,59 +3,83 @@
 <html>
     <body>
         <script type="text/javascript">
+            {% if better %}
+            betterArtist = "{{ better.song.artist }}";
+            betterTitle = "{{ better.song.title }}";
+            betterRhymeScore = "{{ better.rhyme_score|floatformat:'2' }}";
+            {% endif %}
+
+            {% if worse %}
+            worseArtist = "{{ worse.song.artist }}";
+            worseTitle = "{{ worse.song.title }}";
+            worseRhymeScore = "{{ worse.rhyme_score|floatformat:'2' }}";
+            {% endif %}
+
             function showWorseSong() {
-                document.getElementById("worse-song").style.display = "block";
-                document.getElementById("better-song").style.display = "none";
+                document.getElementById("artist").innerHTML = worseArtist;
+                document.getElementById("title").innerHTML = worseTitle;
+                document.getElementById("rhymeScore").innerHTML = worseRhymeScore;
+                document.getElementById("comparisonLyrics").style.display = "inline-block";
+                document.getElementById("comparisonScore").style.display = "inline-block";
             }
 
             function showBetterSong() {
-                document.getElementById("better-song").style.display = "block";
-                document.getElementById("worse-song").style.display = "none";
+                document.getElementById("artist").innerHTML = betterArtist;
+                document.getElementById("title").innerHTML = betterTitle;
+                document.getElementById("rhymeScore").innerHTML = betterRhymeScore;
+                document.getElementById("comparisonLyrics").style.display = "inline-block";
+                document.getElementById("comparisonScore").style.display = "inline-block";
             }
         </script>
 
-        <div id="song-lyrics">
-            <h3>Song <i>{{ score.song.title}}</i></h3>
-            <h4>by <i>{{ score.song.artist }}</i></h4>
-            <p><b>Lyrics:</b></p>
-            <p>{{ score.song.lyrics|linebreaks }}</p>
-            <button type="button" onclick="showBetterSong()">Better</button>
-            <button type="button" onclick="showWorseSong()">Worse</button>
-        </div>
+        <div id="body">
+            <table style="width:100%; height: 100%; overflow-y: auto">
+                <tr>
+                    <td style="width: 30%; background-color: cyan">
+                        <div id="song-lyrics">
+                            <h3>Song <i>{{ score.song.title}}</i></h3>
+                            <h4>by <i>{{ score.song.artist }}</i></h4>
+                            <p><b>Lyrics:</b></p>
+                            <p>{{ score.song.lyrics|linebreaks }}</p>
+                        </div>
+                    </td>
 
-        <div id="song-scores">
-            <div id="current-song">
-                <p><b>These are the calculated scores:</b></p>
-                <ul>
-                    <li>Rhymes: {{ score.rhyme_score }}</li>
-                </ul>
-                <br>
-            </div>
+                    <td style="width: 15%; background-color: crimson">
+                        <div id="song-score">
+                            <p><b>These are the calculated scores:</b></p>
+                            <ul>
+                                <li>Rhymes: {{ score.rhyme_score|floatformat:'2' }}</li>
+                            </ul>
+                        </div>
+                    </td>
 
-            <div id="better-song" style="display: none">
-                {% if better %}
-                <h3>A better song was <i>{{ better.song.title }}</i></h3>
-                <h4>by <i>{{ better.song.artist }}</i></h4>
-                <p><b>Lyrics:</b></p>
-                <p>{{ better.song.lyrics|linebreaks }}</p>
-                <ul>
-                    <li>Rhymes: {{ better.rhyme_score }}</li>
-                </ul>
-                <br>
-                {% endif %}
-            </div>
+                    <td style="width: 10%; background-color: coral">
+                        <div id="buttons">
+                            <button type="button" onclick="showBetterSong()">Better</button>
+                            <button type="button" onclick="showWorseSong()">Worse</button>
+                        </div>
+                    </td>
 
-            <div id="worse-song" style="display: none">
-                {% if worse %}
-                <h3>A worse song was <i>{{ worse.song.title }}</i></h3>
-                <h4>by <i>{{ worse.song.artist }}</i></h4>
-                <p><b>Lyrics:</b></p>
-                <p>{{ worse.song.lyrics|linebreaks }}</p>
-                <ul>
-                    <li>Rhymes: {{ worse.rhyme_score }}</li>
-                </ul>
-                {% endif %}
-            </div>
+                    <td style="width: 15%; background-color: cadetblue">
+                        <div id="comparisonScore" style="display:none">
+                            <p><b>These are the computed scores:</b></p>
+                            <ul>
+                                <li id="rhymeScore"></li>
+                            </ul>
+                        </div>
+                    </td>
+
+                    <td style="width: 30%; background-color: antiquewhite">
+                        <div id="comparisonLyrics" style="display:none">
+                            <h3 id="title"></h3>
+                            <h4 id="artist"></h4>
+                            <p><b>Lyrics:</b></p>
+                            <p>placeholder lyrics</p>
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
         </div>
     </body>
 </html>
