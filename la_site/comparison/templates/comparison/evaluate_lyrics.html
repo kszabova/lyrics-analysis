@@ -19,6 +19,7 @@
                 document.getElementById("artist").innerHTML = worseArtist;
                 document.getElementById("title").innerHTML = worseTitle;
                 document.getElementById("rhymeScore").innerHTML = worseRhymeScore;
+                document.getElementById("lyrics").innerHTML = "{{ worse.song.lyrics|linebreaks|escapejs }}";
                 document.getElementById("comparisonLyrics").style.display = "inline-block";
                 document.getElementById("comparisonScore").style.display = "inline-block";
             }
