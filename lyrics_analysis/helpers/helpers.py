@@ -1,5 +1,7 @@
 import itertools
 import ijson
+import gensim
+import nltk
 
 import lyrics_analysis
 
@@ -103,3 +105,37 @@ def _get_generator_from_file(file):
                 )
 
     return generator
+
+
+def _get_tfidf_dict(file):
+    """
+    Parses a corpus a creates a dictionary containing
+    words appearing in the text.
+    :param file: Text corpus in JSON format containing
+        all fields necessary to create a Song object
+    :return: gensim.corpora.Dictionary object
+    """
+
+    lyrics_generator = _get_generator_from_file(file)
+    dictionary = gensim.corpora.Dictionary(
+        " ".join(song.lyrics).lower().split() for song in lyrics_generator()
+    )
+
+    # remove stop words and words that only occur once
+    stoplist = nltk.corpus.stopwords.words('english')
+    stop_ids = [
+        dictionary.token2id[stopword]
+        for stopword in stoplist
+        if stopword in dictionary.token2id
+    ]
+    punct_list = ". , ' \" & - _ ! ? = / ; :".split()
+    punct_ids = [
+        dictionary.token2id[punct]
+        for punct in punct_list
+        if punct in dictionary.token2id
+    ]
+    once_ids = [tokenid for tokenid, docfreq in dictionary.dfs.items() if docfreq == 1]
+    dictionary.filter_tokens(stop_ids + once_ids + punct_ids)
+    dictionary.compactify()
+
+    return dictionary
