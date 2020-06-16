@@ -9,3 +9,15 @@ def count_unique_words(lyrics):
     return len(word_set)
 
 
+def tf_idf(lyrics, dictionary, tfidf):
+    """
+
+    :param lyrics:
+    :param dictionary:
+    :param tfidf:
+    :return:
+    """
+    lyrics = " ".join(lyrics).lower().split()
+    tfidf_score =tfidf[dictionary.doc2bow(lyrics)]
+    return sum(map(lambda score: score[1], tfidf_score)) / len(tfidf_score)
+
