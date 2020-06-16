@@ -11,10 +11,10 @@ def count_unique_words(lyrics):
 
 def tf_idf(lyrics, dictionary, tfidf):
     """
-
-    :param lyrics:
-    :param dictionary:
-    :param tfidf:
+    :returns the average tf_idf score for the words in the song lyrics.
+    :param lyrics: List of rows of song lyrics
+    :param dictionary: gensim.Dictionary object from the desired corpus
+    :param tfidf: gensim.Tfidf object from the desired corpus
     :return:
     """
     lyrics = " ".join(lyrics).lower().split()
