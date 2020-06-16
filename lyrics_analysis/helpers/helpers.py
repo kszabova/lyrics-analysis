@@ -138,4 +138,7 @@ def _get_tfidf_dict(file):
     dictionary.filter_tokens(stop_ids + once_ids + punct_ids)
     dictionary.compactify()
 
-    return dictionary
+    bow_corpus = [dictionary.doc2bow(" ".join(song.lyrics).lower().split()) for song in lyrics_generator()]
+    tfidf = gensim.models.TfidfModel(bow_corpus)
+
+    return dictionary, tfidf
