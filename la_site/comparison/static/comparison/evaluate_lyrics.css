@@ -7,16 +7,41 @@ body {
     height: 100%;
 }
 
-.lyrics {
+ul {
+    list-style-type: none;
+}
+
+.song {
 }
 
 .score {
+    font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-size: medium;
 }
 
 .innerContent {
     padding: 10px;
 }
 
+/* Song appearance */
+.title {
+    font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-size: x-large;
+}
+
+.artist {
+    font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-size: large;
+}
+
+.lyrics {
+    font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-size: medium;
+    max-height: 500px;
+    overflow: auto;
+}
+
+/* Hide scrollbars - only for Chrome */
 ::-webkit-scrollbar {
     display: none;
 }

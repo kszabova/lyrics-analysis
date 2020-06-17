@@ -17,7 +17,7 @@
             {% if worse %}
             worseArtist = "{{ worse.song.artist }}";
             worseTitle = "{{ worse.song.title }}";
-            worseRhymeScore = "Rhymes: {{ worse.rhyme_score|floatformat:'2' }}";
+            worseRhymeScore = "rhymes: {{ worse.rhyme_score|floatformat:'2' }}";
             {% endif %}
 
             function showWorseSong() {
@@ -43,12 +43,11 @@
             <table width="100%" height="100">
                 <tr>
                     <td style="width: 25%; height: 100vh; background-color: cyan">
-                        <div id="songLyrics" class="lyrics">
+                        <div id="songLyrics" class="song">
                                 <div class="innerContent">
-                                <h3>Song <i>{{ score.song.title}}</i></h3>
-                                <h4>by <i>{{ score.song.artist }}</i></h4>
-                                <p><b>Lyrics:</b></p>
-                                <div style="max-height: 500px; overflow: auto">{{ score.song.lyrics|linebreaks }}</div>
+                                <h3 class="title">{{ score.song.title}}</h3>
+                                <h4 class="artist">{{ score.song.artist }}</h4>
+                                <div class="lyrics">{{ score.song.lyrics|linebreaks }}</div>
                             </div>
                         </div>
                     </td>
@@ -56,9 +55,8 @@
                     <td style="width: 20%; background-color: crimson">
                         <div id="songScore" class="score">
                             <div class="innerContent">
-                                <p><b>These are the calculated scores:</b></p>
                                 <ul>
-                                    <li>Rhymes: {{ score.rhyme_score|floatformat:'2' }}</li>
+                                    <li>rhymes: {{ score.rhyme_score|floatformat:'2' }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -76,7 +74,6 @@
                     <td style="width: 20%; background-color: cadetblue">
                         <div id="comparisonScore" class="score" style="display:none">
                             <div class="innerContent">
-                                <p><b>These are the computed scores:</b></p>
                                 <ul>
                                     <li id="rhymeScore"></li>
                                 </ul>
@@ -85,12 +82,11 @@
                     </td>
 
                     <td style="width: 25%; height: 100vh; background-color: antiquewhite">
-                        <div id="comparisonLyrics" class="lyrics" style="display:none">
+                        <div id="comparisonLyrics" class="song" style="display:none">
                             <div class="innerContent">
-                                <h3 id="title"></h3>
-                                <h4 id="artist"></h4>
-                                <p><b>Lyrics:</b></p>
-                                <div id="lyrics" style="max-height: 500px; overflow: auto"></div>
+                                <h3 class="title" id="title"></h3>
+                                <h4 class="artist" id="artist"></h4>
+                                <div class="lyrics" id="lyrics""></div>
                             </div>
                         </div>
                     </td>
