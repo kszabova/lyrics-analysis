@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 
 <html>
-    <body style="height: 100%">
+    <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'comparison/evaluate_lyrics.css' %}">
+    </head>
+
+    <body>
         <script type="text/javascript">
             {% if better %}
             betterArtist = "{{ better.song.artist|escapejs }}";
@@ -38,16 +43,16 @@
             <table width="100%" height="100">
                 <tr>
                     <td style="width: 30%; height: 100vh; background-color: cyan">
-                        <div id="song-lyrics">
+                        <div id="songLyrics" class="lyrics">
                             <h3>Song <i>{{ score.song.title}}</i></h3>
                             <h4>by <i>{{ score.song.artist }}</i></h4>
                             <p><b>Lyrics:</b></p>
-                            <div style="height: 100vh; overflow: auto">{{ score.song.lyrics|linebreaks }}</div>
+                            <div style="max-height: 500px; overflow: auto">{{ score.song.lyrics|linebreaks }}</div>
                         </div>
                     </td>
 
                     <td style="width: 15%; background-color: crimson">
-                        <div id="song-score">
+                        <div id="songScore" class="score">
                             <p><b>These are the calculated scores:</b></p>
                             <ul>
                                 <li>Rhymes: {{ score.rhyme_score|floatformat:'2' }}</li>
@@ -63,7 +68,7 @@
                     </td>
 
                     <td style="width: 15%; background-color: cadetblue">
-                        <div id="comparisonScore" style="display:none">
+                        <div id="comparisonScore" class="score" style="display:none">
                             <p><b>These are the computed scores:</b></p>
                             <ul>
                                 <li id="rhymeScore"></li>
@@ -72,11 +77,11 @@
                     </td>
 
                     <td style="width: 30%; height: 100vh; background-color: antiquewhite">
-                        <div id="comparisonLyrics" style="display:none">
+                        <div id="comparisonLyrics" class="lyrics" style="display:none">
                             <h3 id="title"></h3>
                             <h4 id="artist"></h4>
                             <p><b>Lyrics:</b></p>
-                            <div id="lyrics" style="height: 100vh; overflow: auto"></div>
+                            <div id="lyrics" style="max-height: 500px; overflow: auto"></div>
                         </div>
                     </td>
 
