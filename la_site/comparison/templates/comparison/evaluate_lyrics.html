@@ -11,7 +11,7 @@
             {% if better %}
             betterArtist = "{{ better.song.artist|escapejs }}";
             betterTitle = "{{ better.song.title|escapejs }}";
-            betterRhymeScore = "Rhymes: {{ better.rhyme_score|floatformat:'2' }}";
+            betterRhymeScore = "rhymes: {{ better.rhyme_score|floatformat:'2' }}";
             {% endif %}
 
             {% if worse %}
@@ -56,7 +56,9 @@
                         <div id="songScore" class="score">
                             <div class="innerContent">
                                 <ul>
+                                    <li>placeholder li element</li>
                                     <li>rhymes: {{ score.rhyme_score|floatformat:'2' }}</li>
+                                    <li>placeholder li element</li>
                                 </ul>
                             </div>
                         </div>

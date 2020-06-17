@@ -11,12 +11,17 @@ ul {
     list-style-type: none;
 }
 
+li:hover {
+    transform: scale(1.1);
+}
+
 .song {
 }
 
 .score {
     font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
     font-size: medium;
+    padding: 20px;
 }
 
 .innerContent {
@@ -39,6 +44,7 @@ ul {
     font-size: medium;
     max-height: 500px;
     overflow: auto;
+    margin-top: 20px;
 }
 
 /* Hide scrollbars - only for Chrome */
