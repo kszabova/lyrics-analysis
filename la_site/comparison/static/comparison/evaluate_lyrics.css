@@ -53,6 +53,55 @@ li:hover {
 .buttonColumn {
     width: 10%;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: hotpink;
+}
+
+/* Appearance of the central buttons */
+.btnPlaceholder {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 50%;
+    color: coral;
+    font-size: 0;
+}
+
+.button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline: none;
+    font-family: "opensans-light", sans-serif;
+}
+
+#betterButton, #worseButton {
+    display: none;
+}
+
+#betterBtnWrapper:hover #betterBtnPlaceholder {
+    display: none;
+}
+
+#betterBtnWrapper:hover #betterButton {
+    display: block
+}
+
+#worseBtnWrapper:hover #worseBtnPlaceholder {
+    display: none;
+}
+
+#worseBtnWrapper:hover #worseButton {
+    display: block
 }
 
 /* Song appearance */

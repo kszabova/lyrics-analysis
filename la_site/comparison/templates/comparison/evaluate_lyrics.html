@@ -67,8 +67,14 @@
                     <td class="buttonColumn">
                         <div id="buttons">
                             <div class="innerContent">
-                                <button id="betterButton" type="button" onclick="showBetterSong()">Better</button>
-                                <button type="button" onclick="showWorseSong()">Worse</button>
+                                <div id="betterBtnWrapper">
+                                    <button class="btnPlaceholder" id="betterBtnPlaceholder" type="button"></button>
+                                    <button class="button" id="betterButton" type="button" onclick="showBetterSong()">show better song</button>
+                                </div>
+                                <div id="worseBtnWrapper">
+                                    <button class="btnPlaceholder" id="worseBtnPlaceholder" type="button"></button>
+                                    <button class="button" id="worseButton" type="button" onclick="showWorseSong()">show worse song</button>
+                                </div>
                             </div>
                         </div>
                     </td>
