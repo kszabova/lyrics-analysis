@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'opensans-regular';
+  src: url('../fonts/OpenSans-Regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'opensans-light';
+  src: url('../fonts/OpenSans-Light.ttf') format("truetype");
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -5,6 +15,7 @@
 
 body {
     height: 100%;
+    background-color: #3AAFA9;
 }
 
 ul {
@@ -19,30 +30,55 @@ li:hover {
 }
 
 .score {
-    font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-family: 'opensans-light', sans-serif;
     font-size: medium;
-    padding: 20px;
+    padding-left: 15px;
 }
 
 .innerContent {
     padding: 10px;
 }
 
+/* Columns appearance */
+.songColumn {
+    width: 30%;
+    height: 100vh;
+}
+
+.scoreColumn {
+    width: 15%;
+    height: 100vh;
+}
+
+.buttonColumn {
+    width: 10%;
+    height: 100vh;
+}
+
 /* Song appearance */
 .title {
-    font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-    font-size: x-large;
+    padding: 5px;
+    text-transform: uppercase;
+    font-family: 'opensans-regular', sans-serif;
+    font-size: xx-large;
+    color: white;
+    background-color: #2B7A78;
 }
 
 .artist {
-    font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-    font-size: large;
+    padding: 5px;
+    text-transform: uppercase;
+    font-family: 'opensans-regular', sans-serif;
+    font-size: x-large;
+    color: white;
+    background-color: #2B7A78   ;
 }
 
 .lyrics {
-    font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-family: 'opensans-light', sans-serif;
     font-size: medium;
-    max-height: 500px;
+    color: black;
+    max-height: 60vh;
     overflow: auto;
     margin-top: 20px;
 }

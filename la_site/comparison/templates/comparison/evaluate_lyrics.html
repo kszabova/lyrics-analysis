@@ -42,7 +42,7 @@
         <div id="songView" style="height: 100vh">
             <table width="100%" height="100">
                 <tr>
-                    <td style="width: 25%; height: 100vh; background-color: cyan">
+                    <td class="songColumn">
                         <div id="songLyrics" class="song">
                                 <div class="innerContent">
                                 <h3 class="title">{{ score.song.title}}</h3>
@@ -52,7 +52,7 @@
                         </div>
                     </td>
 
-                    <td style="width: 20%; background-color: crimson">
+                    <td class="scoreColumn">
                         <div id="songScore" class="score">
                             <div class="innerContent">
                                 <ul>
@@ -64,7 +64,7 @@
                         </div>
                     </td>
 
-                    <td style="width: 10%; background-color: coral">
+                    <td class="buttonColumn">
                         <div id="buttons">
                             <div class="innerContent">
                                 <button id="betterButton" type="button" onclick="showBetterSong()">Better</button>
@@ -73,7 +73,7 @@
                         </div>
                     </td>
 
-                    <td style="width: 20%; background-color: cadetblue">
+                    <td class="scoreColumn">
                         <div id="comparisonScore" class="score" style="display:none">
                             <div class="innerContent">
                                 <ul>
@@ -83,7 +83,7 @@
                         </div>
                     </td>
 
-                    <td style="width: 25%; height: 100vh; background-color: antiquewhite">
+                    <td class="songColumn">
                         <div id="comparisonLyrics" class="song" style="display:none">
                             <div class="innerContent">
                                 <h3 class="title" id="title"></h3>
