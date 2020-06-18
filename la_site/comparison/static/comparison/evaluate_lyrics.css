@@ -8,6 +8,12 @@
   src: url('../fonts/OpenSans-Light.ttf') format("truetype");
 }
 
+:root {
+    --primary-color: #a5ffd6;
+    --accent-color: #ffa69e;
+    --dark-accent-color: #ff686b;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -15,7 +21,12 @@
 
 body {
     height: 100%;
-    background-color: #3AAFA9;
+    background-color: var(--primary-color);
+}
+
+#header {
+    height: 9vh;
+    background-color: var(--accent-color);
 }
 
 ul {
@@ -24,15 +35,20 @@ ul {
 
 li:hover {
     transform: scale(1.1);
+    font-weight: bold;
+    color: var(--dark-accent-color);
 }
 
 .song {
 }
 
 .score {
+    width: 90%;
     font-family: 'opensans-light', sans-serif;
     font-size: medium;
-    padding-left: 15px;
+    padding-left: 10%;
+    border: solid var(--accent-color);
+    border-width: 0 1px;
 }
 
 .innerContent {
@@ -42,46 +58,45 @@ li:hover {
 /* Columns appearance */
 .songColumn {
     width: 30%;
-    height: 100vh;
+    height: 90vh;
 }
 
 .scoreColumn {
     width: 15%;
-    height: 100vh;
+    height: 90vh;
 }
 
 .buttonColumn {
-    width: 10%;
-    height: 100vh;
+    width: 100%;
+    height: 90vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: hotpink;
 }
 
 /* Appearance of the central buttons */
+
 .btnPlaceholder {
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 20%;
+    margin: 10% 30%;
     border: none;
     border-radius: 50%;
-    color: coral;
+    background-color: var(--accent-color);
     font-size: 0;
 }
 
 .button {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 10% 30%;
     background-color: Transparent;
-    background-repeat:no-repeat;
     border: none;
     cursor:pointer;
-    overflow: hidden;
     outline: none;
     font-family: "opensans-light", sans-serif;
+    color: var(--dark-accent-color);
+}
+
+#betterBtnWrapper, #worseBtnWrapper {
+    width: 100%;
 }
 
 #betterButton, #worseButton {
@@ -106,21 +121,17 @@ li:hover {
 
 /* Song appearance */
 .title {
-    padding: 5px;
     text-transform: uppercase;
     font-family: 'opensans-regular', sans-serif;
     font-size: xx-large;
-    color: white;
-    background-color: #2B7A78;
+    color: var(--dark-accent-color);
 }
 
 .artist {
-    padding: 5px;
     text-transform: uppercase;
     font-family: 'opensans-regular', sans-serif;
     font-size: x-large;
-    color: white;
-    background-color: #2B7A78   ;
+    color: var(--dark-accent-color);
 }
 
 .lyrics {
