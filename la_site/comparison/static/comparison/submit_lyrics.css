@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'opensans-regular';
+  src: url('../fonts/OpenSans-Regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'opensans-light';
+  src: url('../fonts/OpenSans-Light.ttf') format("truetype");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --primary-color: #a5ffd6;
+    --accent-color: #ffa69e;
+    --dark-accent-color: #ff686b;
+}
+
+body {
+    height: 100%;
+    background-color: var(--primary-color);
+}
+
+#header {
+    height: 9vh;
+    background-color: var(--accent-color);
+}
+
+#formWrapper {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+}
+
+#form {
+    height: 300px;
+    position: absolute;
+    bottom: 0;
+}
+
+form {
+    bottom: 0;
+}

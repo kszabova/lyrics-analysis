@@ -1,5 +1,22 @@
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Song comparison</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'comparison/submit_lyrics.css' %}">
+    </head>
+
+    <body>
+        <div id="header"></div>
+        <div id="formWrapper">
+            <div id="form">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
