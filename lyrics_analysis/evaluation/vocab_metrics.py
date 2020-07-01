@@ -19,5 +19,5 @@ def tf_idf(lyrics, dictionary, tfidf):
     """
     lyrics = " ".join(lyrics).lower().split()
     tfidf_score =tfidf[dictionary.doc2bow(lyrics)]
-    return sum(map(lambda score: score[1], tfidf_score)) / len(tfidf_score)
+    return sum(map(lambda score: score[1], tfidf_score)) / len(tfidf_score) if len(tfidf_score) else 0
 
