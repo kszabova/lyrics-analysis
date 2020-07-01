@@ -49,3 +49,18 @@ def remove_last_word_on_line(lyrics, probability=0.1):
             new_lyrics.append(line)
 
     return new_lyrics
+
+
+def remove_words_on_line(lyrics, probability=0.1):
+    """
+    Removes each word in the lyrics with the given probability.
+    :param lyrics: List of strings
+    :param probability: Probability of a word being removed
+    :return: Modified lyrics
+    """
+
+    new_lyrics = []
+    for line in lyrics:
+        modified_line = [word for word in line.split() if random.random() > probability]
+        new_lyrics.append(" ".join(modified_line))
+    return new_lyrics
