@@ -179,7 +179,7 @@ def _generate_metric_quality_sets(funcs, func_names, probs, sizes, sets, source,
     for prob, size in [(p, s) for p in probs for s in sizes]:
         for func, func_name in zip(funcs, func_names):
             for i in range(sets):
-                out_file = dest + str(size) + func_name + ".json" + str(prob) + "_" + str(i+1)
+                out_file = dest + str(size) + func_name + str(prob) + "_" + str(i+1) + ".json"
                 examples = []
                 for example in lyrics_analysis.sampler.sample_n_songs_from_generator(
                         size, _create_generator_from_file(source)):
