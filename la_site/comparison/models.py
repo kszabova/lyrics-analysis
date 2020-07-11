@@ -13,11 +13,21 @@ spec.loader.exec_module(lyrics_analysis)
 
 class Artist(models.Model):
 
-    artist_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
-    number_of_songs = models.IntegerField()
+    number_of_songs = models.IntegerField(default=0)
     rhyme_score_avg = models.FloatField(default=0)
     tfidf_score_avg = models.FloatField(default=0)
+
+    def __str__(self):
+        return str(self.name)
+
+    @classmethod
+    def create(cls, name, rhyme_score_avg, tfidf_score_avg):
+        artist = cls(name=name,
+                     number_of_songs=1,
+                     rhyme_score_avg=rhyme_score_avg,
+                     tfidf_score_avg=tfidf_score_avg)
+        return artist
 
 
 class Song(models.Model):
