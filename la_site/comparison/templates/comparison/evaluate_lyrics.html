@@ -13,19 +13,22 @@
             betterArtist = "{{ better.song.artist|escapejs }}";
             betterTitle = "{{ better.song.title|escapejs }}";
             betterRhymeScore = "rhymes: {{ better.rhyme_score|floatformat:'2' }}";
+            betterTfidfScore = "tf-idf: {{ better.tfidf_score|floatformat:'2' }}";
             {% endif %}
 
             {% if worse %}
             worseArtist = "{{ worse.song.artist }}";
             worseTitle = "{{ worse.song.title }}";
             worseRhymeScore = "rhymes: {{ worse.rhyme_score|floatformat:'2' }}";
+            worseTfidfScore = "tf-idf: {{ worse.tfidf_score|floatformat:'2' }}";
             {% endif %}
 
             function showWorseSong() {
                 document.getElementById("artist").innerHTML = worseArtist;
                 document.getElementById("title").innerHTML = worseTitle;
-                document.getElementById("rhymeScore").innerHTML = worseRhymeScore;
                 document.getElementById("lyrics").innerHTML = "{{ worse.song.lyrics|linebreaks|escapejs }}";
+                document.getElementById("rhymeScore").innerHTML = worseRhymeScore;
+                document.getElementById("tfidfScore").innerHTML = worseTfidfScore;
                 document.getElementById("comparisonLyrics").style.display = "inline-block";
                 document.getElementById("comparisonScore").style.display = "inline-block";
             }
@@ -35,6 +38,7 @@
                 document.getElementById("title").innerHTML = betterTitle;
                 document.getElementById("lyrics").innerHTML = "{{ better.song.lyrics|linebreaks|escapejs }}";
                 document.getElementById("rhymeScore").innerHTML = betterRhymeScore;
+                document.getElementById("tfidfScore").innerHTML = betterTfidfScore;
                 document.getElementById("comparisonLyrics").style.display = "inline-block";
                 document.getElementById("comparisonScore").style.display = "inline-block";
             }
@@ -58,9 +62,8 @@
                         <div id="songScore" class="score">
                             <div class="innerContent">
                                 <ul>
-                                    <li>placeholder li element</li>
                                     <li>rhymes: {{ score.rhyme_score|floatformat:'2' }}</li>
-                                    <li>placeholder li element</li>
+                                    <li>tf-idf: {{ score.tfidf_score|floatformat:'2' }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -69,11 +72,11 @@
                     <td class="buttonColumn">
                         <div id="betterBtnWrapper">
                             <button class="btnPlaceholder" id="betterBtnPlaceholder" type="button"></button>
-                            <button class="button" id="betterButton" type="button" onclick="showBetterSong()">show better song</button>
+                            <button class="button" id="betterButton" type="button" onclick="showBetterSong()">show a song by a better artist</button>
                         </div>
                         <div id="worseBtnWrapper">
                             <button class="btnPlaceholder" id="worseBtnPlaceholder" type="button"></button>
-                            <button class="button" id="worseButton" type="button" onclick="showWorseSong()">show worse song</button>
+                            <button class="button" id="worseButton" type="button" onclick="showWorseSong()">show a song by a worse artist</button>
                         </div>
                     </td>
 
@@ -82,6 +85,7 @@
                             <div class="innerContent">
                                 <ul>
                                     <li id="rhymeScore"></li>
+                                    <li id="tfidfScore"></li>
                                 </ul>
                             </div>
                         </div>
