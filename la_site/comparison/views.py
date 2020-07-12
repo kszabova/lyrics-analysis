@@ -42,11 +42,12 @@ def get_lyrics(request):
             artist_name = form.cleaned_data['artist']
             title = form.cleaned_data['title']
             genre = form.cleaned_data['genre']
-            lyrics = form.cleaned_data['lyrics'].splitlines()
+            lyrics = form.cleaned_data['lyrics']
 
             # calculate scores
-            rhyme_score = lyrics_analysis.evaluation.rhymes(lyrics)
-            tfidf_score = lyrics_analysis.evaluation.tf_idf(lyrics, dict, model)
+            lyrics_lines = lyrics.splitlines()
+            rhyme_score = lyrics_analysis.evaluation.rhymes(lyrics_lines)
+            tfidf_score = lyrics_analysis.evaluation.tf_idf(lyrics_lines, dict, model)
 
             artist = Artist.objects.filter(name=artist_name).first()
             if not artist:
