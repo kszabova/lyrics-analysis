@@ -51,6 +51,12 @@ li:hover {
     border-width: 0 1px;
 }
 
+.stats {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--dark-accent-color)
+}
+
 .innerContent {
     padding: 10px;
 }
