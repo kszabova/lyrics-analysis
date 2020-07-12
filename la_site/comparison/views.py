@@ -1,11 +1,15 @@
 import random
+import gensim
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.db.models import F
 
-from .models import Score
+from .models import Artist, Song, Score
 from .forms import SongForm
+
+import lyrics_analysis
 
 def evaluate_lyrics(request, score_id):
     score = get_object_or_404(Score, pk=score_id)
@@ -28,14 +32,37 @@ def evaluate_lyrics(request, score_id):
         }
     )
 
+# load models necessary for score evaluation
+dict = gensim.corpora.Dictionary.load("./comparison/static/models/tfidf.dict")
+model = gensim.models.TfidfModel.load("./comparison/static/models/tfidf.model")
 def get_lyrics(request):
     if request.method == 'POST':
         form = SongForm(request.POST)
         if form.is_valid():
-            song = form.save(commit=False)
+            artist_name = form.cleaned_data['artist']
+            title = form.cleaned_data['title']
+            genre = form.cleaned_data['genre']
+            lyrics = form.cleaned_data['lyrics'].splitlines()
+
+            # calculate scores
+            rhyme_score = lyrics_analysis.evaluation.rhymes(lyrics)
+            tfidf_score = lyrics_analysis.evaluation.tf_idf(lyrics, dict, model)
+
+            artist = Artist.objects.filter(name=artist_name).first()
+            if not artist:
+                artist = Artist.create(artist_name)
+                artist.save()
+
+            song = Song.create(artist, title, genre, lyrics)
             song.save()
-            score = Score.create(song)
+
+            score = Score.create(song, rhyme_score, tfidf_score)
             score.save()
+
+            artist.rhyme_score_avg = (F('number_of_songs') * F('rhyme_score_avg') + rhyme_score) / (F('number_of_songs') + 1)
+            artist.tfidf_score_avg = (F('number_of_songs') * F('tfidf_score_avg') + tfidf_score) / (F('number_of_songs') + 1)
+            artist.number_of_songs = F('number_of_songs') + 1
+            artist.save()
 
             return HttpResponseRedirect(reverse('comparison:evaluate_lyrics', args=(score.id,)))
 
