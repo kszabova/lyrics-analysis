@@ -17,12 +17,15 @@ def calculate_metric_quality(metric, eval_sets):
         raise ValueError("There must be at least two sets to compare.")
 
     # save the relation
+    # creates a dictionary indexed by (score_class, set_index)
+    # where the value is a list of all (score_class, set_index) sets
+    # that should have a higher score than the key
     higher_scores = {}
-    for i in range(len(eval_sets)):
-        for j in range(len(eval_sets[i])):
-            higher_scores[(i,j)] = [
+    for score_class in range(len(eval_sets)):
+        for set_index in range(len(eval_sets[score_class])):
+            higher_scores[(score_class, set_index)] = [
                 (x, y)
-                for x in range(i)
+                for x in range(score_class)
                 for y in range(len(eval_sets[x]))
             ]
 
