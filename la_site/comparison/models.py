@@ -22,17 +22,16 @@ class Artist(models.Model):
         return str(self.name)
 
     @classmethod
-    def create(cls, name, rhyme_score_avg, tfidf_score_avg):
+    def create(cls, name):
         artist = cls(name=name,
-                     number_of_songs=1,
-                     rhyme_score_avg=rhyme_score_avg,
-                     tfidf_score_avg=tfidf_score_avg)
+                     number_of_songs=0,
+                     rhyme_score_avg=0,
+                     tfidf_score_avg=0)
         return artist
 
 
 class Song(models.Model):
 
-    song_id = models.IntegerField(primary_key=True)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     genre = models.CharField(max_length=3, choices=[
@@ -63,11 +62,7 @@ class Score(models.Model):
         return str(self.song)
 
     @classmethod
-    def create(cls, song):
-        lyrics = song.lyrics.splitlines()
-        rhyme_score = lyrics_analysis.evaluation.rhymes(lyrics)
-        tfidf_score = lyrics_analysis.evaluation.tfidf(lyrics)
-
+    def create(cls, song, rhyme_score, tfidf_score):
         score = cls(song=song, rhyme_score=rhyme_score, tfidf_score=tfidf_score)
         return score
 
