@@ -14,6 +14,8 @@
             betterTitle = "{{ better.song.title|escapejs }}";
             betterRhymeScore = "rhymes: {{ better.rhyme_score|floatformat:'2' }}";
             betterTfidfScore = "tf-idf: {{ better.tfidf_score|floatformat:'2' }}";
+            betterRhymeAvg = "average rhymes: {{ betterArtist.rhyme_score_avg|floatformat:'2' }}";
+            betterTfidfAvg = "average tf-idf: {{ betterArtist.tfidf_score_avg|floatformat:'2' }}";
             {% endif %}
 
             {% if worse %}
@@ -21,6 +23,8 @@
             worseTitle = "{{ worse.song.title }}";
             worseRhymeScore = "rhymes: {{ worse.rhyme_score|floatformat:'2' }}";
             worseTfidfScore = "tf-idf: {{ worse.tfidf_score|floatformat:'2' }}";
+            worseRhymeAvg = "average rhymes: {{ worseArtist.rhyme_score_avg|floatformat:'2' }}";
+            worseTfidfAvg = "average tf-idf: {{ worseArtist.tfidf_score_avg|floatformat:'2' }}";
             {% endif %}
 
             function showWorseSong() {
@@ -29,6 +33,8 @@
                 document.getElementById("lyrics").innerHTML = "{{ worse.song.lyrics|linebreaks|escapejs }}";
                 document.getElementById("rhymeScore").innerHTML = worseRhymeScore;
                 document.getElementById("tfidfScore").innerHTML = worseTfidfScore;
+                document.getElementById("avgRhymeScore").innerHTML = worseRhymeAvg;
+                document.getElementById("avgTfidfScore").innerHTML = worseTfidfAvg;
                 document.getElementById("comparisonLyrics").style.display = "inline-block";
                 document.getElementById("comparisonScore").style.display = "inline-block";
             }
@@ -39,6 +45,8 @@
                 document.getElementById("lyrics").innerHTML = "{{ better.song.lyrics|linebreaks|escapejs }}";
                 document.getElementById("rhymeScore").innerHTML = betterRhymeScore;
                 document.getElementById("tfidfScore").innerHTML = betterTfidfScore;
+                document.getElementById("avgRhymeScore").innerHTML = betterRhymeAvg;
+                document.getElementById("avgTfidfScore").innerHTML = betterTfidfAvg;
                 document.getElementById("comparisonLyrics").style.display = "inline-block";
                 document.getElementById("comparisonScore").style.display = "inline-block";
             }
@@ -83,6 +91,14 @@
                     <td class="scoreColumn">
                         <div id="comparisonScore" class="score" style="display:none">
                             <div class="innerContent">
+                                <p>Artist stats:</p>
+                                <ul>
+                                    <li id="avgRhymeScore"></li>
+                                    <li id="avgTfidfScore"></li>
+                                </ul>
+                            </div>
+                            <div class="innerContent">
+                                <p>Song stats:</p>
                                 <ul>
                                     <li id="rhymeScore"></li>
                                     <li id="tfidfScore"></li>
