@@ -14,8 +14,8 @@
             betterTitle = "{{ better.song.title|escapejs }}";
             betterRhymeScore = "rhymes: {{ better.rhyme_score|floatformat:'2' }}";
             betterTfidfScore = "tf-idf: {{ better.tfidf_score|floatformat:'2' }}";
-            betterRhymeAvg = "average rhymes: {{ betterArtist.rhyme_score_avg|floatformat:'2' }}";
-            betterTfidfAvg = "average tf-idf: {{ betterArtist.tfidf_score_avg|floatformat:'2' }}";
+            betterRhymeAvg = "rhymes: {{ better.song.artist.rhyme_score_avg|floatformat:'2' }}";
+            betterTfidfAvg = "tf-idf: {{ better.song.artist.tfidf_score_avg|floatformat:'2' }}";
             {% endif %}
 
             {% if worse %}
