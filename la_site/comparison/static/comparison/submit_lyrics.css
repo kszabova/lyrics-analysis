@@ -86,6 +86,7 @@ form select {
 }
 
 form input[type="submit"] {
+	cursor: pointer;
 	position: relative;
 	display: block;
 	padding: 19px 39px 18px 39px;
