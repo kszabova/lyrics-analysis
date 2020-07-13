@@ -9,7 +9,7 @@ can provide the results in an accessible manner.
 Download the source code.
 
 The `lyrics_analysis` module can be accessed by
-typing `import lyircs_analysis` in a python file.
+typing `import lyrics_analysis` in a python file.
 
 To run the web app, navigate to the `./la_site/`
 directory in your command line and run
