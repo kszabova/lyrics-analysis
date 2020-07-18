@@ -8,37 +8,28 @@ from django.db.models import F
 
 from .models import Artist, Song, Score
 from .forms import SongForm
+from .artists import Artists
 
 import lyrics_analysis
 
 def evaluate_lyrics(request, score_id):
     score = get_object_or_404(Score, pk=score_id)
 
-    # find an artist with better average scores
-    better_artists = Artist.objects.filter(rhyme_score_avg__gt=score.rhyme_score,
-                                           tfidf_score_avg__gt=score.tfidf_score)
-    better_artist = random.choice(better_artists) if better_artists else None
-    better_scores = Score.objects.filter(song__artist=better_artist,
-                                         rhyme_score__gt=score.rhyme_score,
-                                         tfidf_score__gt=score.tfidf_score)
-    better_score = random.choice(better_scores) if better_scores else None
+    scores = []
+    for artist in Artists.ARTISTS:
+        artist_songs = Score.objects.filter(song__artist=artist[0])
+        scores.append(random.choice(artist_songs) if artist_songs else None)
 
-    # find an artist with worse average scores
-    worse_artists = Artist.objects.filter(rhyme_score_avg__lt=score.rhyme_score,
-                                          tfidf_score_avg__lt=score.tfidf_score)
-    worse_artist = random.choice(worse_artists) if worse_artists else None
-    worse_scores = Score.objects.filter(song__artist=worse_artist,
-                                        rhyme_score__lt=score.rhyme_score,
-                                        tfidf_score__lt=score.tfidf_score)
-    worse_score = random.choice(worse_scores) if worse_scores else None
+    artists = []
+    for i, artist in enumerate(Artists.ARTISTS):
+        artists.append((artist[0], artist[1], scores[i]))
 
     return render(
         request,
         'comparison/evaluate_lyrics.html',
         {
             'score': score,
-            'better': better_score,
-            'worse': worse_score
+            'artists': artists
         }
     )
 
