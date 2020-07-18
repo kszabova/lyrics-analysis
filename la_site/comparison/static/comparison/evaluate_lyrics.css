@@ -93,8 +93,8 @@ li:hover {
     font-size: 0;
 }
 
-.button {
-    margin: 10% 30%;
+.btn {
+    margin: 20% 30%;
     background-color: Transparent;
     border: none;
     cursor:pointer;
@@ -103,28 +103,21 @@ li:hover {
     color: var(--dark-accent-color);
 }
 
-#betterBtnWrapper, #worseBtnWrapper {
+.btnWrapper {
     width: 100%;
 }
 
-#betterButton, #worseButton {
+.btn {
     display: none;
 }
 
-#betterBtnWrapper:hover #betterBtnPlaceholder {
+.btnWrapper:hover .btnPlaceholder {
     display: none;
 }
 
-#betterBtnWrapper:hover #betterButton {
-    display: block
-}
-
-#worseBtnWrapper:hover #worseBtnPlaceholder {
-    display: none;
-}
-
-#worseBtnWrapper:hover #worseButton {
-    display: block
+.btnWrapper:hover .btn {
+    display: block;
+    cursor: pointer;
 }
 
 /* Song appearance */

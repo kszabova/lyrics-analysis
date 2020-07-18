@@ -9,6 +9,23 @@
 
     <body>
         <script type="text/javascript">
+            var names = [];
+            var titles = [];
+            var lyrics = [];
+            var rhymeScores = [];
+            var tfidfScores = [];
+            var rhymeAvgs = [];
+            var tfidfAvgs = [];
+            {% for artist in artists %}
+                names.push("{{ artist.0|escapejs }}");
+                titles.push("{{ artist.2.song.title|escapejs }}");
+                lyrics.push("{{ artist.2.song.lyrics|linebreaks|escapejs }}")
+                rhymeScores.push("{{ artist.2.rhyme_score|floatformat:'2' }}");
+                tfidfScores.push("{{ artist.2.tfidf_score|floatformat:'2' }}");
+                rhymeAvgs.push("{{ artist.0.rhyme_score_avg|floatformat:'2' }}");
+                tfidfAvgs.push("{{ artist.0.tfidf_score_avg|floatformat:'2' }}");
+            {% endfor %}
+
             {% if better %}
             betterArtist = "{{ better.song.artist|escapejs }}";
             betterTitle = "{{ better.song.title|escapejs }}";
@@ -50,6 +67,19 @@
                 document.getElementById("comparisonLyrics").style.display = "inline-block";
                 document.getElementById("comparisonScore").style.display = "inline-block";
             }
+
+            function showSong(i) {
+                i = i-1;
+                document.getElementById("artist").innerHTML = names[i];
+                document.getElementById("title").innerHTML = titles[i];
+                document.getElementById("lyrics").innerHTML = lyrics[i];
+                document.getElementById("rhymeScore").innerHTML = rhymeScores[i];
+                document.getElementById("tfidfScore").innerHTML = tfidfScores[i];
+                document.getElementById("avgRhymeScore").innerHTML = rhymeAvgs[i];
+                document.getElementById("avgTfidfScore").innerHTML = tfidfAvgs[i];
+                document.getElementById("comparisonLyrics").style.display = "inline-block";
+                document.getElementById("comparisonScore").style.display = "inline-block";
+            }
         </script>
 
         <div id="header"></div>
@@ -78,14 +108,12 @@
                     </td>
 
                     <td class="buttonColumn">
-                        <div id="betterBtnWrapper">
-                            <button class="btnPlaceholder" id="betterBtnPlaceholder" type="button"></button>
-                            <button class="button" id="betterButton" type="button" onclick="showBetterSong()">show a song by a better artist</button>
+                        {% for artist in artists %}
+                        <div class="btnWrapper">
+                            <button class="btnPlaceholder"type="button"></button>
+                            <button class="btn" type="button" onclick="showSong({{ forloop.counter }})">{{ forloop.counter }}</button>
                         </div>
-                        <div id="worseBtnWrapper">
-                            <button class="btnPlaceholder" id="worseBtnPlaceholder" type="button"></button>
-                            <button class="button" id="worseButton" type="button" onclick="showWorseSong()">show a song by a worse artist</button>
-                        </div>
+                        {% endfor %}
                     </td>
 
                     <td class="scoreColumn">
