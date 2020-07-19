@@ -14,6 +14,11 @@
     --accent-color: #F9627D;
 	--dark-primary-color: #C65B7C;
     --dark-accent-color: #5B3758;
+    --pop: #FF579F;
+    --rock: #BBDFC5;
+    --rap: #3C787E;
+    --country: #587792;
+    --r-n-b: #5D2E46;
 }
 
 * {
@@ -118,6 +123,26 @@ li:hover {
 .btnWrapper:hover .btn {
     display: block;
     cursor: pointer;
+}
+
+.pop {
+    background-color: var(--pop);
+}
+
+.rock {
+    background-color: var(--rock);
+}
+
+.rap {
+    background-color: var(--rap);
+}
+
+.country {
+    background-color: var(--country);
+}
+
+.r-n-b {
+    background-color: var(--r-n-b);
 }
 
 /* Song appearance */

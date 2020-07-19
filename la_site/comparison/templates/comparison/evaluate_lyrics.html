@@ -79,8 +79,8 @@
                         {% for artist in artists %}
                             {% if artist.3 %}
                                 <div class="btnWrapper">
-                                    <button class="btnPlaceholder"type="button"></button>
-                                    <button class="btn" type="button" onclick="showSong({{ forloop.counter }})">{{ forloop.counter }}</button>
+                                    <button class="btnPlaceholder {{ artist.1 }}" type="button"></button>
+                                    <button class="btn" type="button" onclick="showSong({{ forloop.counter }})">{{ artist.0 }} ({{ artist.1 }})</button>
                                 </div>
                             {% else %}
                                 <div class="origSong">
