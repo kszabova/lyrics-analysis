@@ -16,13 +16,20 @@ def evaluate_lyrics(request, score_id):
     score = get_object_or_404(Score, pk=score_id)
 
     scores = []
-    for artist in Artists.ARTISTS:
-        artist_songs = Score.objects.filter(song__artist=artist[0])
-        scores.append(random.choice(artist_songs) if artist_songs else None)
+    sorted_artists = Artists.add_artist(score)
+    for artist in sorted_artists:
+        if artist:
+            artist_songs = Score.objects.filter(song__artist=artist[0])
+            scores.append(random.choice(artist_songs) if artist_songs else None)
+        else:
+            scores.append(None)
 
     artists = []
-    for i, artist in enumerate(Artists.ARTISTS):
-        artists.append((artist[0], artist[1], scores[i]))
+    for i, artist in enumerate(sorted_artists):
+        if artist:
+            artists.append((artist[0], artist[1], scores[i], True))
+        else:
+            artists.append((None, None, None, False))
 
     return render(
         request,

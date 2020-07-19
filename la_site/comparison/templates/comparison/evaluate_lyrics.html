@@ -17,56 +17,24 @@
             var rhymeAvgs = [];
             var tfidfAvgs = [];
             {% for artist in artists %}
-                names.push("{{ artist.0|escapejs }}");
-                titles.push("{{ artist.2.song.title|escapejs }}");
-                lyrics.push("{{ artist.2.song.lyrics|linebreaks|escapejs }}")
-                rhymeScores.push("{{ artist.2.rhyme_score|floatformat:'2' }}");
-                tfidfScores.push("{{ artist.2.tfidf_score|floatformat:'2' }}");
-                rhymeAvgs.push("{{ artist.0.rhyme_score_avg|floatformat:'2' }}");
-                tfidfAvgs.push("{{ artist.0.tfidf_score_avg|floatformat:'2' }}");
+                {% if artist.3 %}
+                    names.push("{{ artist.0|escapejs }}");
+                    titles.push("{{ artist.2.song.title|escapejs }}");
+                    lyrics.push("{{ artist.2.song.lyrics|linebreaks|escapejs }}")
+                    rhymeScores.push("{{ artist.2.rhyme_score|floatformat:'2' }}");
+                    tfidfScores.push("{{ artist.2.tfidf_score|floatformat:'2' }}");
+                    rhymeAvgs.push("{{ artist.0.rhyme_score_avg|floatformat:'2' }}");
+                    tfidfAvgs.push("{{ artist.0.tfidf_score_avg|floatformat:'2' }}");
+                {% else %}
+                    names.push(null);
+                    titles.push(null);
+                    lyrics.push(null);
+                    rhymeScores.push(null);
+                    tfidfScores.push(null);
+                    rhymeAvgs.push(null);
+                    tfidfAvgs.push(null);
+                {% endif %}
             {% endfor %}
-
-            {% if better %}
-            betterArtist = "{{ better.song.artist|escapejs }}";
-            betterTitle = "{{ better.song.title|escapejs }}";
-            betterRhymeScore = "rhymes: {{ better.rhyme_score|floatformat:'2' }}";
-            betterTfidfScore = "tf-idf: {{ better.tfidf_score|floatformat:'2' }}";
-            betterRhymeAvg = "rhymes: {{ better.song.artist.rhyme_score_avg|floatformat:'2' }}";
-            betterTfidfAvg = "tf-idf: {{ better.song.artist.tfidf_score_avg|floatformat:'2' }}";
-            {% endif %}
-
-            {% if worse %}
-            worseArtist = "{{ worse.song.artist }}";
-            worseTitle = "{{ worse.song.title }}";
-            worseRhymeScore = "rhymes: {{ worse.rhyme_score|floatformat:'2' }}";
-            worseTfidfScore = "tf-idf: {{ worse.tfidf_score|floatformat:'2' }}";
-            worseRhymeAvg = "average rhymes: {{ worseArtist.rhyme_score_avg|floatformat:'2' }}";
-            worseTfidfAvg = "average tf-idf: {{ worseArtist.tfidf_score_avg|floatformat:'2' }}";
-            {% endif %}
-
-            function showWorseSong() {
-                document.getElementById("artist").innerHTML = worseArtist;
-                document.getElementById("title").innerHTML = worseTitle;
-                document.getElementById("lyrics").innerHTML = "{{ worse.song.lyrics|linebreaks|escapejs }}";
-                document.getElementById("rhymeScore").innerHTML = worseRhymeScore;
-                document.getElementById("tfidfScore").innerHTML = worseTfidfScore;
-                document.getElementById("avgRhymeScore").innerHTML = worseRhymeAvg;
-                document.getElementById("avgTfidfScore").innerHTML = worseTfidfAvg;
-                document.getElementById("comparisonLyrics").style.display = "inline-block";
-                document.getElementById("comparisonScore").style.display = "inline-block";
-            }
-
-            function showBetterSong() {
-                document.getElementById("artist").innerHTML = betterArtist;
-                document.getElementById("title").innerHTML = betterTitle;
-                document.getElementById("lyrics").innerHTML = "{{ better.song.lyrics|linebreaks|escapejs }}";
-                document.getElementById("rhymeScore").innerHTML = betterRhymeScore;
-                document.getElementById("tfidfScore").innerHTML = betterTfidfScore;
-                document.getElementById("avgRhymeScore").innerHTML = betterRhymeAvg;
-                document.getElementById("avgTfidfScore").innerHTML = betterTfidfAvg;
-                document.getElementById("comparisonLyrics").style.display = "inline-block";
-                document.getElementById("comparisonScore").style.display = "inline-block";
-            }
 
             function showSong(i) {
                 i = i-1;
@@ -109,10 +77,16 @@
 
                     <td class="buttonColumn">
                         {% for artist in artists %}
-                        <div class="btnWrapper">
-                            <button class="btnPlaceholder"type="button"></button>
-                            <button class="btn" type="button" onclick="showSong({{ forloop.counter }})">{{ forloop.counter }}</button>
-                        </div>
+                            {% if artist.3 %}
+                                <div class="btnWrapper">
+                                    <button class="btnPlaceholder"type="button"></button>
+                                    <button class="btn" type="button" onclick="showSong({{ forloop.counter }})">{{ forloop.counter }}</button>
+                                </div>
+                            {% else %}
+                                <div class="origSong">
+                                    <p>Here is your song</p>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     </td>
 
