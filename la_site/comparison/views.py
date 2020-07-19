@@ -14,15 +14,24 @@ import lyrics_analysis
 
 def evaluate_lyrics(request, score_id):
     score = get_object_or_404(Score, pk=score_id)
+    lyrics = lyrics_analysis.lyrics_tagging.tag_rhymes(score.song.lyrics, 'class="rhymesOrig"')
 
     scores = []
+    comparison_lyrics = []
     sorted_artists = Artists.add_artist(score)
     for artist in sorted_artists:
         if artist:
             artist_songs = Score.objects.filter(song__artist=artist[0])
-            scores.append(random.choice(artist_songs) if artist_songs else None)
+            comparison_score = random.choice(artist_songs) if artist_songs else None
+            if comparison_score:
+                scores.append(comparison_score)
+                comparison_lyrics.append(lyrics_analysis.lyrics_tagging.tag_rhymes(comparison_score.song.lyrics, 'class="rhymesCompare"'))
+            else:
+                scores.append(None)
+                comparison_lyrics.append(None)
         else:
             scores.append(None)
+            comparison_lyrics.append(None)
 
     artists = []
     for i, artist in enumerate(sorted_artists):
@@ -36,7 +45,9 @@ def evaluate_lyrics(request, score_id):
         'comparison/evaluate_lyrics.html',
         {
             'score': score,
-            'artists': artists
+            'lyrics': lyrics,
+            'artists': artists,
+            'comparison_lyrics': comparison_lyrics
         }
     )
 

@@ -16,11 +16,15 @@
             var tfidfScores = [];
             var rhymeAvgs = [];
             var tfidfAvgs = [];
+
+            {% for l in comparison_lyrics %}
+                lyrics.push("{{ l|safe|linebreaks|escapejs }}");
+            {% endfor %}
+
             {% for artist in artists %}
                 {% if artist.3 %}
                     names.push("{{ artist.0|escapejs }}");
                     titles.push("{{ artist.2.song.title|escapejs }}");
-                    lyrics.push("{{ artist.2.song.lyrics|linebreaks|escapejs }}")
                     rhymeScores.push("{{ artist.2.rhyme_score|floatformat:'2' }}");
                     tfidfScores.push("{{ artist.2.tfidf_score|floatformat:'2' }}");
                     rhymeAvgs.push("{{ artist.0.rhyme_score_avg|floatformat:'2' }}");
@@ -28,13 +32,13 @@
                 {% else %}
                     names.push(null);
                     titles.push(null);
-                    lyrics.push(null);
                     rhymeScores.push(null);
                     tfidfScores.push(null);
                     rhymeAvgs.push(null);
                     tfidfAvgs.push(null);
                 {% endif %}
             {% endfor %}
+
 
             function showSong(i) {
                 i = i-1;
@@ -59,7 +63,7 @@
                                 <div class="innerContent">
                                 <h3 class="title">{{ score.song.title}}</h3>
                                 <h4 class="artist">{{ score.song.artist }}</h4>
-                                <div class="lyrics">{{ score.song.lyrics|linebreaks }}</div>
+                                <div class="lyrics">{{ lyrics|safe|linebreaks }}</div>
                             </div>
                         </div>
                     </td>
