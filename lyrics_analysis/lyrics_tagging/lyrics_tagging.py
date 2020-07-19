@@ -1,11 +1,10 @@
 import lyrics_analysis
 
-def tag_rhymes(lyrics, tag):
+def tag_rhymes(lyrics, cls):
     """
-    Wraps rhyming words of lyrics inside given HTML tag.
+    Wraps rhyming words of lyrics inside a class tag.
     :param lyrics: Lyrics where lines are separated by newlines
-    :param tag: Tag that rhyming words should be wrapped in.
-        Without brackets, i.e. 'strong' instead of '<strong>'.
+    :param cls: Class name that rhyming words should be wrapped in.
     :return: Lyrics separated by newlines with appropriately
         tagged words
     """
@@ -17,7 +16,7 @@ def tag_rhymes(lyrics, tag):
     for i, line in enumerate(split_lines):
         if i in rhyming_lines and line.split():
             words = line.split()
-            words[-1] = "<" + tag + ">" + words[-1] + "</" + tag + ">"
+            words[-1] = "<class=\"" + cls + "\">" + words[-1] + "</class>"
             lines.append(" ".join(words))
         else:
             lines.append(line)
