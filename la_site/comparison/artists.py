@@ -24,13 +24,20 @@ class Artists:
     def add_artist(cls, score):
         extended_artists = []
         avg = (score.tfidf_score + score.rhyme_score) / 2
+        added_new = False
         for i, artist in enumerate(cls.ARTISTS):
             if avg < (artist[0].tfidf_score_avg+artist[0].rhyme_score_avg)/2:
                 extended_artists.append(artist)
             else:
                 extended_artists.append(None)
+                added_new = True
                 extended_artists.extend(cls.ARTISTS[i:])
                 break
+                
+        # if new score hasn't been added yet, add it at the end
+        if not added_new:
+            extended_artists.append(None)
+
         return extended_artists
 
 
