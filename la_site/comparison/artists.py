@@ -1,4 +1,4 @@
-from .models import Artist, Song, Score
+from .models import Artist
 
 class Artists:
     artist_names = [
@@ -18,7 +18,7 @@ class Artists:
     artist_objects = [Artist.objects.get(name=name) for name in artist_names]
 
     ARTISTS = list(zip(artist_objects, artist_genres))
-    sorted(ARTISTS, key=lambda o: (o[0].tfidf_score_avg + o[0].rhyme_score_avg)/2, reverse=True)
+    ARTISTS = sorted(ARTISTS, key=lambda o: (o[0].tfidf_score_avg + o[0].rhyme_score_avg)/2, reverse=True)
 
     @classmethod
     def add_artist(cls, score):
