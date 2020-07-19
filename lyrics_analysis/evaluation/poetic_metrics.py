@@ -3,7 +3,7 @@ from lyrics_analysis import helpers
 
 ARPABET = nltk.corpus.cmudict.dict()
 
-def rhymes(lyrics, rhyme_level=2, max_distance=2, arpabet=ARPABET):
+def rhymes(lyrics, rhyme_level=2, max_distance=2, arpabet=ARPABET, return_rhymes=False):
     """
     Calculates the proportion of lines that rhyme with
     another line at a distance of at most max_distance
@@ -13,6 +13,8 @@ def rhymes(lyrics, rhyme_level=2, max_distance=2, arpabet=ARPABET):
     :param max_distance: Lines at what distance are still
         considered a rhyme
     :param arpabet: Dictionary with word pronunciations
+    :param return_rhymes: Whether we want to return a list of
+        lines where the last word rhymes
     :return: Proportion of rhyming lines
     """
 
@@ -35,13 +37,20 @@ def rhymes(lyrics, rhyme_level=2, max_distance=2, arpabet=ARPABET):
 
     # add a point for each line that rhymes with a line at at most max_distance
     rhyme_count = 0
+    lines = []
     for i, prons in enumerate(last_phonemes):
         considered_lines = [i - d for d in range(1, max_distance + 1)] + \
                            [i + d for d in range(1, max_distance + 1)]
         for pron in prons:
             if set(rhyming_lines[pron]).intersection(set(considered_lines)):
                 rhyme_count += 1
+                lines.append(i)
                 break
 
     # calculate the proportion of rhyming lines
-    return rhyme_count / len(last_words)
+    proportion = rhyme_count / len(last_words)
+
+    if return_rhymes:
+        return proportion, lines
+    else:
+        return proportion
