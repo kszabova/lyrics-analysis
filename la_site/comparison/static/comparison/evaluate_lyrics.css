@@ -58,10 +58,15 @@ li:hover {
     border-width: 0 1px;
 }
 
-.stats {
+.stats, .origSong {
     text-transform: uppercase;
     font-weight: bold;
     color: var(--dark-accent-color)
+}
+
+.origSong {
+    font-family: 'opensans-light', sans-serif;
+    text-align: center;
 }
 
 .innerContent {
