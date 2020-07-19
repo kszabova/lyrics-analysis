@@ -16,7 +16,7 @@ def tag_rhymes(lyrics, cls):
     for i, line in enumerate(split_lines):
         if i in rhyming_lines and line.split():
             words = line.split()
-            words[-1] = "<class=\"" + cls + "\">" + words[-1] + "</class>"
+            words[-1] = '<div class="' + cls + '">' + words[-1] + '</div>'
             lines.append(" ".join(words))
         else:
             lines.append(line)
