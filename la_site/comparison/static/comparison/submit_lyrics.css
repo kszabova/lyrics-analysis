@@ -14,11 +14,11 @@
 }
 
 :root {
-    --primary-color: #AEADF0;
-	--light-accent-color: #F9ADA0;
-    --accent-color: #F9627D;
-	--dark-primary-color: #C65B7C;
-    --dark-accent-color: #5B3758;
+    --primary-color: #C9FBFF;
+	--light-accent-color: #FCD0A1;
+    --accent-color: #FE5F55;
+	--dark-primary-color: #007991;
+    --dark-accent-color: #222E50;
 }
 
 body {
