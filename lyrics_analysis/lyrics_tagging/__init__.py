@@ -1,0 +1,1 @@
+from .lyrics_tagging import tag_rhymes
