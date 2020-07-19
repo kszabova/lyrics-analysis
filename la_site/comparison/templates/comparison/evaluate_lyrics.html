@@ -8,52 +8,6 @@
     </head>
 
     <body>
-        <script type="text/javascript">
-            var names = [];
-            var titles = [];
-            var lyrics = [];
-            var rhymeScores = [];
-            var tfidfScores = [];
-            var rhymeAvgs = [];
-            var tfidfAvgs = [];
-
-            {% for l in comparison_lyrics %}
-                lyrics.push("{{ l|safe|linebreaks|escapejs }}");
-            {% endfor %}
-
-            {% for artist in artists %}
-                {% if artist.3 %}
-                    names.push("{{ artist.0|escapejs }}");
-                    titles.push("{{ artist.2.song.title|escapejs }}");
-                    rhymeScores.push("{{ artist.2.rhyme_score|floatformat:'2' }}");
-                    tfidfScores.push("{{ artist.2.tfidf_score|floatformat:'2' }}");
-                    rhymeAvgs.push("{{ artist.0.rhyme_score_avg|floatformat:'2' }}");
-                    tfidfAvgs.push("{{ artist.0.tfidf_score_avg|floatformat:'2' }}");
-                {% else %}
-                    names.push(null);
-                    titles.push(null);
-                    rhymeScores.push(null);
-                    tfidfScores.push(null);
-                    rhymeAvgs.push(null);
-                    tfidfAvgs.push(null);
-                {% endif %}
-            {% endfor %}
-
-
-            function showSong(i) {
-                i = i-1;
-                document.getElementById("artist").innerHTML = names[i];
-                document.getElementById("title").innerHTML = titles[i];
-                document.getElementById("lyrics").innerHTML = lyrics[i];
-                document.getElementById("rhymeScore").innerHTML = rhymeScores[i];
-                document.getElementById("tfidfScore").innerHTML = tfidfScores[i];
-                document.getElementById("avgRhymeScore").innerHTML = rhymeAvgs[i];
-                document.getElementById("avgTfidfScore").innerHTML = tfidfAvgs[i];
-                document.getElementById("comparisonLyrics").style.display = "inline-block";
-                document.getElementById("comparisonScore").style.display = "inline-block";
-            }
-        </script>
-
         <div id="header"></div>
         <div id="songView">
             <table style="width: 80vw; margin: auto">
@@ -72,7 +26,7 @@
                         <div id="songScore" class="score">
                             <div class="innerContent">
                                 <ul>
-                                    <li>rhymes: {{ score.rhyme_score|floatformat:'2' }}</li>
+                                    <li id="origRhymeScore">rhymes: {{ score.rhyme_score|floatformat:'2' }}</li>
                                     <li>tf-idf: {{ score.tfidf_score|floatformat:'2' }}</li>
                                 </ul>
                             </div>
@@ -126,5 +80,79 @@
                 </tr>
             </table>
         </div>
+        <script type="text/javascript">
+            var names = [];
+            var titles = [];
+            var lyrics = [];
+            var rhymeScores = [];
+            var tfidfScores = [];
+            var rhymeAvgs = [];
+            var tfidfAvgs = [];
+
+            {% for l in comparison_lyrics %}
+                lyrics.push("{{ l|safe|linebreaks|escapejs }}");
+            {% endfor %}
+
+            {% for artist in artists %}
+                {% if artist.3 %}
+                    names.push("{{ artist.0|escapejs }}");
+                    titles.push("{{ artist.2.song.title|escapejs }}");
+                    rhymeScores.push("rhymes: {{ artist.2.rhyme_score|floatformat:'2' }}");
+                    tfidfScores.push("tf-idf: {{ artist.2.tfidf_score|floatformat:'2' }}");
+                    rhymeAvgs.push("average rhymes: {{ artist.0.rhyme_score_avg|floatformat:'2' }}");
+                    tfidfAvgs.push("average tf-idf: {{ artist.0.tfidf_score_avg|floatformat:'2' }}");
+                {% else %}
+                    names.push(null);
+                    titles.push(null);
+                    rhymeScores.push(null);
+                    tfidfScores.push(null);
+                    rhymeAvgs.push(null);
+                    tfidfAvgs.push(null);
+                {% endif %}
+            {% endfor %}
+
+
+            function showSong(i) {
+                i = i-1;
+                document.getElementById("artist").innerHTML = names[i];
+                document.getElementById("title").innerHTML = titles[i];
+                document.getElementById("lyrics").innerHTML = lyrics[i];
+                document.getElementById("rhymeScore").innerHTML = rhymeScores[i];
+                document.getElementById("tfidfScore").innerHTML = tfidfScores[i];
+                document.getElementById("avgRhymeScore").innerHTML = rhymeAvgs[i];
+                document.getElementById("avgTfidfScore").innerHTML = tfidfAvgs[i];
+                document.getElementById("comparisonLyrics").style.display = "inline-block";
+                document.getElementById("comparisonScore").style.display = "inline-block";
+            }
+
+            document.getElementById("origRhymeScore").onmouseenter = function() {
+                for (var element of document.getElementsByClassName("rhymesOrig"))
+                {
+                    element.style.fontWeight = "bold";
+                }
+            };
+
+            document.getElementById("origRhymeScore").onmouseout = function() {
+                for (var element of document.getElementsByClassName("rhymesOrig"))
+                {
+                    element.style.fontWeight = "normal";
+                }
+            };
+
+            document.getElementById("rhymeScore").onmouseenter = function() {
+                for (var element of document.getElementsByClassName("rhymesCompare"))
+                {
+                    element.style.fontWeight = "bold";
+                }
+            };
+
+            document.getElementById("rhymeScore").onmouseout = function() {
+                for (var element of document.getElementsByClassName("rhymesCompare"))
+                {
+                    element.style.fontWeight = "normal";
+                }
+            };
+
+        </script>
     </body>
 </html>

@@ -14,7 +14,7 @@ import lyrics_analysis
 
 def evaluate_lyrics(request, score_id):
     score = get_object_or_404(Score, pk=score_id)
-    lyrics = lyrics_analysis.lyrics_tagging.tag_rhymes(score.song.lyrics, 'class="rhymesOrig"')
+    lyrics = lyrics_analysis.lyrics_tagging.tag_rhymes(score.song.lyrics, "rhymesOrig")
 
     scores = []
     comparison_lyrics = []
@@ -25,7 +25,7 @@ def evaluate_lyrics(request, score_id):
             comparison_score = random.choice(artist_songs) if artist_songs else None
             if comparison_score:
                 scores.append(comparison_score)
-                comparison_lyrics.append(lyrics_analysis.lyrics_tagging.tag_rhymes(comparison_score.song.lyrics, 'class="rhymesCompare"'))
+                comparison_lyrics.append(lyrics_analysis.lyrics_tagging.tag_rhymes(comparison_score.song.lyrics, "rhymesCompare"))
             else:
                 scores.append(None)
                 comparison_lyrics.append(None)
