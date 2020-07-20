@@ -2,17 +2,23 @@ from .models import Artist
 
 class Artists:
     artist_names = [
-        "Z-Mane",
-        "Zola Jesus",
-        "Awa",
-        "Zip K.",
-        "Boston"
+        "Madonna",
+        "Michael Jackson",
+        "Eminem",
+        "2Pac",
+        "Led Zeppelin",
+        "Queen",
+        "Aretha Franklin",
+        "Dolly Parton"
     ]
     artist_genres = [
         "pop",
+        "pop",
+        "rap",
+        "rap",
+        "rock",
         "rock",
         "r-n-b",
-        "rap",
         "country"
     ]
     artist_objects = [Artist.objects.get(name=name) for name in artist_names]
